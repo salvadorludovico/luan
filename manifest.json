@@ -1,0 +1,22 @@
+{
+  "name": "LUAN",
+  "short_name": "LUAN",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#030303",
+  "theme_color": "#030303",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "favicon.jpg",
+      "sizes": "192x192",
+      "type": "image/jpeg",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "favicon.jpg",
+      "sizes": "512x512",
+      "type": "image/jpeg"
+    }
+  ]
+}
