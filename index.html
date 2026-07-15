@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>GynNight - Curadoria de Reservas</title>
+    <title>LUAN - Curadoria de Reservas</title>
     
     <!-- Google Fonts: Seleção elegante de tipografias -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -103,7 +103,7 @@
         <header class="px-6 py-5 flex justify-between items-center border-b border-theme-border bg-theme-bg/85 backdrop-blur-md sticky top-0 z-40 theme-transition">
             <div class="space-y-0.5">
                 <span class="text-[9px] tracking-[0.2em] uppercase font-bold text-neutral-500 font-heading">Curadoria</span>
-                <h1 class="text-sm font-bold tracking-tight font-heading text-theme-primary" id="header-title">GynNight</h1>
+                <h1 class="text-sm font-bold tracking-tight font-heading text-theme-primary" id="header-title">LUAN</h1>
             </div>
             
             <!-- Toggle de Modo (Cliente vs Gerente) -->
@@ -191,11 +191,213 @@
 
         </main>
 
+        <!-- TAB 4: VIBES (FULLSCREEN VIDEO FEED) -->
+        <div id="tab-vibes-view" class="fixed inset-x-0 top-0 bottom-16 max-w-md mx-auto bg-black hidden flex-col z-30 overflow-hidden border-x border-neutral-900 shadow-2xl">
+            <!-- Scroll Snapping Video Container -->
+            <div id="vibes-scroll-container" class="flex-1 overflow-y-scroll snap-y snap-mandatory no-scrollbar w-full h-full">
+                
+                <!-- Video Card 1: SUBCULT -->
+                <div class="snap-start w-full h-full relative bg-black flex items-center justify-center overflow-hidden vibes-card" data-house="subcult" data-event="subcult-main">
+                    <video class="absolute inset-0 w-full h-full object-cover" loop playsinline muted src="https://player.vimeo.com/external/403816439.sd.mp4?s=d4f40d6c543fbfd63ba4f4058f4a13d7d74b830d&profile_id=165&oauth2_token_id=57447761"></video>
+                    
+                    <!-- Dark Gradient Overlay for text readability -->
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/95 via-black/40 to-black/20 pointer-events-none"></div>
+                    
+                    <!-- Sound Toggle Floating Button -->
+                    <button onclick="toggleVibesAudio(event)" class="absolute top-6 right-6 z-40 w-10 h-10 rounded-full bg-black/40 border border-white/10 flex items-center justify-center text-white backdrop-blur-md hover:bg-black/60 transition-all sound-toggle-btn">
+                        <i data-lucide="volume-x" class="w-4 h-4 mute-icon"></i>
+                        <i data-lucide="volume-2" class="w-4 h-4 unmute-icon hidden"></i>
+                    </button>
+
+                    <!-- Scroll Up Indicator -->
+                    <div class="absolute top-6 left-1/2 -translate-x-1/2 z-40 flex flex-col items-center space-y-1 pointer-events-none opacity-40 animate-pulse">
+                        <span class="text-[8px] uppercase tracking-[0.2em] text-white font-bold">Vibes LUAN</span>
+                        <i data-lucide="chevron-down" class="w-3.5 h-3.5 text-white"></i>
+                    </div>
+                    
+                    <!-- Bottom Overlay (House & Event Details) -->
+                    <div class="absolute bottom-6 inset-x-0 px-6 z-40 space-y-4">
+                        <div class="space-y-2">
+                            <!-- House Tag & Category -->
+                            <div class="flex items-center space-x-2">
+                                <span class="text-[9px] font-black font-heading bg-white text-black px-2 py-0.5 rounded uppercase tracking-wider">
+                                    SUBCULT
+                                </span>
+                                <span class="text-[9px] text-white/60 font-medium uppercase tracking-wider font-heading">Techno & Industrial</span>
+                            </div>
+                            
+                            <!-- Event Title -->
+                            <div class="space-y-1">
+                                <h3 class="text-base font-black text-white font-heading uppercase tracking-tight leading-tight">SUBCULT 3.0</h3>
+                                <p class="text-xs text-white/80 leading-relaxed max-w-[85%] font-light">Ocupação industrial voltada ao techno nacional e local. Cenografia bruta e sound system de alta pressão.</p>
+                            </div>
+                            
+                            <!-- Music Type / DJ line -->
+                            <div class="flex items-center space-x-1.5 text-xs text-white/70">
+                                <i data-lucide="music" class="w-3.5 h-3.5 text-white/60"></i>
+                                <span class="font-mono text-[10px] uppercase truncate max-w-[80%]">MOLOTHAV, ALEX JUSTINO, KOBOT...</span>
+                            </div>
+                        </div>
+                        
+                        <!-- CTA Action Button -->
+                        <div class="flex items-center justify-between pt-1">
+                            <span class="text-[10px] font-bold text-white/50 tracking-wider uppercase font-heading">Sáb, 27.Set — 22h às 06h</span>
+                            <button onclick="openReservationModal('subcult-main', 'subcult')" class="bg-white hover:bg-neutral-200 text-black px-5 py-2.5 rounded-[var(--button-radius)] text-xs font-black uppercase tracking-widest font-heading transition-all shadow-lg active:scale-95">
+                                Garantir Lista
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <!-- Playback Progress Bar -->
+                    <div class="absolute bottom-0 left-0 right-0 h-[2.5px] bg-white/20">
+                        <div class="h-full bg-white transition-all duration-100 ease-linear vibes-progress-bar" style="width: 0%"></div>
+                    </div>
+                </div>
+
+                <!-- Video Card 2: BEAT PROIBIDO -->
+                <div class="snap-start w-full h-full relative bg-black flex items-center justify-center overflow-hidden vibes-card" data-house="beatproibido" data-event="beat-main">
+                    <video class="absolute inset-0 w-full h-full object-cover" loop playsinline muted src="https://player.vimeo.com/external/435643226.sd.mp4?s=89bf26909873099951664e43fec14775d710b370&profile_id=165&oauth2_token_id=57447761"></video>
+                    
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/95 via-black/40 to-black/20 pointer-events-none"></div>
+                    
+                    <button onclick="toggleVibesAudio(event)" class="absolute top-6 right-6 z-40 w-10 h-10 rounded-full bg-black/40 border border-white/10 flex items-center justify-center text-white backdrop-blur-md hover:bg-black/60 transition-all sound-toggle-btn">
+                        <i data-lucide="volume-x" class="w-4 h-4 mute-icon"></i>
+                        <i data-lucide="volume-2" class="w-4 h-4 unmute-icon hidden"></i>
+                    </button>
+                    
+                    <div class="absolute bottom-6 inset-x-0 px-6 z-40 space-y-4">
+                        <div class="space-y-2">
+                            <div class="flex items-center space-x-2">
+                                <span class="text-[9px] font-black font-heading bg-red-600 text-white px-2 py-0.5 rounded uppercase tracking-wider">
+                                    BEAT PROIBIDO
+                                </span>
+                                <span class="text-[9px] text-white/60 font-medium uppercase tracking-wider font-heading">Funk & Mandelão</span>
+                            </div>
+                            
+                            <div class="space-y-1">
+                                <h3 class="text-base font-black text-white font-heading uppercase tracking-tight leading-tight">BAILE DO BEAT</h3>
+                                <p class="text-xs text-white/80 leading-relaxed max-w-[85%] font-light">O maior e mais quente baile de funk de Goiânia. Batidas aceleradas, mandelão e muito grave de favela.</p>
+                            </div>
+                            
+                            <div class="flex items-center space-x-1.5 text-xs text-white/70">
+                                <i data-lucide="music" class="w-3.5 h-3.5 text-white/60"></i>
+                                <span class="font-mono text-[10px] uppercase truncate max-w-[80%]">BEAT CREW & CONVIDADOS</span>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-center justify-between pt-1">
+                            <span class="text-[10px] font-bold text-white/50 tracking-wider uppercase font-heading">Sábado — 23h às 05h</span>
+                            <button onclick="openReservationModal('beat-main', 'beatproibido')" class="bg-red-600 hover:bg-red-500 text-white px-5 py-2.5 rounded-[var(--button-radius)] text-xs font-black uppercase tracking-widest font-heading transition-all shadow-lg active:scale-95">
+                                Garantir Lista
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="absolute bottom-0 left-0 right-0 h-[2.5px] bg-white/20">
+                        <div class="h-full bg-red-600 transition-all duration-100 ease-linear vibes-progress-bar" style="width: 0%"></div>
+                    </div>
+                </div>
+
+                <!-- Video Card 3: MÔI GOIÂNIA -->
+                <div class="snap-start w-full h-full relative bg-black flex items-center justify-center overflow-hidden vibes-card" data-house="moi" data-event="moi-sexta">
+                    <video class="absolute inset-0 w-full h-full object-cover" loop playsinline muted src="https://player.vimeo.com/external/554141695.sd.mp4?s=67a840003058097b6927da8e5473cf797e8ec9cb&profile_id=165&oauth2_token_id=57447761"></video>
+                    
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/95 via-black/40 to-black/20 pointer-events-none"></div>
+                    
+                    <button onclick="toggleVibesAudio(event)" class="absolute top-6 right-6 z-40 w-10 h-10 rounded-full bg-black/40 border border-white/10 flex items-center justify-center text-white backdrop-blur-md hover:bg-black/60 transition-all sound-toggle-btn">
+                        <i data-lucide="volume-x" class="w-4 h-4 mute-icon"></i>
+                        <i data-lucide="volume-2" class="w-4 h-4 unmute-icon hidden"></i>
+                    </button>
+                    
+                    <div class="absolute bottom-6 inset-x-0 px-6 z-40 space-y-4">
+                        <div class="space-y-2">
+                            <div class="flex items-center space-x-2">
+                                <span class="text-[9px] font-black font-heading bg-[#ffb400] text-black px-2 py-0.5 rounded uppercase tracking-wider">
+                                    MÔI GOIÂNIA
+                                </span>
+                                <span class="text-[9px] text-white/60 font-medium uppercase tracking-wider font-heading">Funk, Eletrônico & Hits</span>
+                            </div>
+                            
+                            <div class="space-y-1">
+                                <h3 class="text-base font-black text-white font-heading uppercase tracking-tight leading-tight">CHÁ DE ROLEZEIRO</h3>
+                                <p class="text-xs text-white/80 leading-relaxed max-w-[85%] font-light">O verdadeiro pancadão do Bueno. Encontro semanal sofisticado e animado de Goiânia.</p>
+                            </div>
+                            
+                            <div class="flex items-center space-x-1.5 text-xs text-white/70">
+                                <i data-lucide="music" class="w-3.5 h-3.5 text-white/60"></i>
+                                <span class="font-mono text-[10px] uppercase truncate max-w-[80%]">DJs FUNK & BAILE</span>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-center justify-between pt-1">
+                            <span class="text-[10px] font-bold text-white/50 tracking-wider uppercase font-heading">Sexta — 19h às 03h</span>
+                            <button onclick="openReservationModal('moi-sexta', 'moi')" class="bg-[#ffb400] hover:bg-[#d97706] text-black px-5 py-2.5 rounded-[var(--button-radius)] text-xs font-black uppercase tracking-widest font-heading transition-all shadow-lg active:scale-95">
+                                Reservar
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="absolute bottom-0 left-0 right-0 h-[2.5px] bg-white/20">
+                        <div class="h-full bg-[#ffb400] transition-all duration-100 ease-linear vibes-progress-bar" style="width: 0%"></div>
+                    </div>
+                </div>
+
+                <!-- Video Card 4: FLUXO BAR -->
+                <div class="snap-start w-full h-full relative bg-black flex items-center justify-center overflow-hidden vibes-card" data-house="fluxo" data-event="fluxo-sexta">
+                    <video class="absolute inset-0 w-full h-full object-cover" loop playsinline muted src="https://player.vimeo.com/external/491028711.sd.mp4?s=2d7f8d6f51954129df4b4fcf7f897df2efc4d2d4&profile_id=165&oauth2_token_id=57447761"></video>
+                    
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/95 via-black/40 to-black/20 pointer-events-none"></div>
+                    
+                    <button onclick="toggleVibesAudio(event)" class="absolute top-6 right-6 z-40 w-10 h-10 rounded-full bg-black/40 border border-white/10 flex items-center justify-center text-white backdrop-blur-md hover:bg-black/60 transition-all sound-toggle-btn">
+                        <i data-lucide="volume-x" class="w-4 h-4 mute-icon"></i>
+                        <i data-lucide="volume-2" class="w-4 h-4 unmute-icon hidden"></i>
+                    </button>
+                    
+                    <div class="absolute bottom-6 inset-x-0 px-6 z-40 space-y-4">
+                        <div class="space-y-2">
+                            <div class="flex items-center space-x-2">
+                                <span class="text-[9px] font-black font-heading bg-blue-600 text-white px-2 py-0.5 rounded uppercase tracking-wider">
+                                    FLUXO BAR
+                                </span>
+                                <span class="text-[9px] text-white/60 font-medium uppercase tracking-wider font-heading">Trap, Funk & Pop</span>
+                            </div>
+                            
+                            <div class="space-y-1">
+                                <h3 class="text-base font-black text-white font-heading uppercase tracking-tight leading-tight">BAILE DO FLUXO</h3>
+                                <p class="text-xs text-white/80 leading-relaxed max-w-[85%] font-light">O verdadeiro fluxo do Setor Sul. Muito trap, funk, pop e hip hop no melhor rolê de rua da cidade.</p>
+                            </div>
+                            
+                            <div class="flex items-center space-x-1.5 text-xs text-white/70">
+                                <i data-lucide="music" class="w-3.5 h-3.5 text-white/60"></i>
+                                <span class="font-mono text-[10px] uppercase truncate max-w-[80%]">LINEUP FLUXO CREW</span>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-center justify-between pt-1">
+                            <span class="text-[10px] font-bold text-white/50 tracking-wider uppercase font-heading">Sexta — 21h às 04h</span>
+                            <button onclick="openReservationModal('fluxo-sexta', 'fluxo')" class="bg-blue-600 hover:bg-blue-500 text-white px-5 py-2.5 rounded-[var(--button-radius)] text-xs font-black uppercase tracking-widest font-heading transition-all shadow-lg active:scale-95">
+                                Garantir Lista
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="absolute bottom-0 left-0 right-0 h-[2.5px] bg-white/20">
+                        <div class="h-full bg-blue-600 transition-all duration-100 ease-linear vibes-progress-bar" style="width: 0%"></div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
         <!-- BARRA DE NAVEGAÇÃO INFERIOR (Pulsada ao fundo - Correção de CSS do iOS/Android) -->
         <nav class="fixed bottom-0 left-0 right-0 max-w-md mx-auto h-16 border-t border-theme-border bg-theme-bg/95 backdrop-blur-md flex justify-around items-center px-6 z-50 theme-transition">
             <button onclick="switchTab('discover')" id="nav-discover" class="nav-btn flex flex-col items-center justify-center space-y-1 text-white transition-all">
                 <i data-lucide="compass" class="w-4 h-4"></i>
                 <span class="text-[9px] uppercase font-bold tracking-widest font-heading">Casas</span>
+            </button>
+            <button onclick="switchTab('vibes')" id="nav-vibes" class="nav-btn flex flex-col items-center justify-center space-y-1 text-neutral-500 hover:text-neutral-300 transition-all">
+                <i data-lucide="film" class="w-4 h-4"></i>
+                <span class="text-[9px] uppercase font-bold tracking-widest font-heading">Vibes</span>
             </button>
             <button onclick="switchTab('promos')" id="nav-promos" class="nav-btn flex flex-col items-center justify-center space-y-1 text-neutral-500 hover:text-neutral-300 transition-all">
                 <i data-lucide="flame" class="w-4 h-4"></i>
@@ -316,9 +518,9 @@
                     bgApp: "#030303", // Fundo preto absoluto como Subcult/Cajuína
                     bgCard: "#0a0a0a", // Fundo do cartão preto profundo
                     borderColor: "#191919",
-                    primary: "#552e0f", // Cor marrom de madeira 552e0f requisitada!
+                    primary: "#ffb400", // Cor ouro ffb400 requisitada!
                     secondary: "#85877c",
-                    accent: "#552e0f",
+                    accent: "#ffb400",
                     fontHeading: "'Space Grotesk', sans-serif",
                     fontBody: "'Plus Jakarta Sans', sans-serif",
                     borderRadius: "1rem",
@@ -576,7 +778,7 @@
                 root.style.setProperty('--border-radius', '0.5rem');
                 root.style.setProperty('--button-radius', '0.375rem');
                 
-                document.getElementById('header-title').innerText = "GynNight";
+                document.getElementById('header-title').innerText = "LUAN";
                 document.getElementById('header-title').className = "text-sm font-bold tracking-[0.05em] font-heading text-white";
                 return;
             }
@@ -610,6 +812,19 @@
             document.getElementById('tab-reservas-view').classList.add('hidden');
             document.getElementById('house-detail-view').classList.add('hidden');
             document.getElementById('manager-dashboard-view').classList.add('hidden');
+            document.getElementById('tab-vibes-view').classList.add('hidden');
+
+            // Pause all vibes videos when leaving the tab
+            if (tab !== 'vibes') {
+                document.querySelectorAll('.vibes-card video').forEach(vid => {
+                    vid.pause();
+                });
+                document.body.style.overflow = ''; // Restore body scroll
+                document.querySelector('header').classList.remove('hidden'); // Show header
+            } else {
+                document.body.style.overflow = 'hidden'; // Prevent main page scrolling/bouncing on iOS
+                document.querySelector('header').classList.add('hidden'); // Hide header for fully immersive video
+            }
 
             document.querySelectorAll('.nav-btn').forEach(btn => {
                 btn.className = "nav-btn flex flex-col items-center justify-center space-y-1 text-neutral-500 hover:text-neutral-300 transition-all";
@@ -619,6 +834,11 @@
                 document.getElementById('tab-discover-view').classList.remove('hidden');
                 document.getElementById('nav-discover').className = "nav-btn flex flex-col items-center justify-center space-y-1 text-white transition-all";
                 applyTheme(activeHouseId || 'default');
+            } else if (tab === 'vibes') {
+                document.getElementById('tab-vibes-view').classList.remove('hidden');
+                document.getElementById('nav-vibes').className = "nav-btn flex flex-col items-center justify-center space-y-1 text-white transition-all";
+                applyTheme('default');
+                initVibesEngine(); // Lazy-initialize the observer, audio mute states and event listeners
             } else if (tab === 'promos') {
                 document.getElementById('tab-promos-view').classList.remove('hidden');
                 document.getElementById('nav-promos').className = "nav-btn flex flex-col items-center justify-center space-y-1 text-white transition-all";
@@ -632,6 +852,186 @@
             if (isManagerMode) {
                 exitManagerMode();
             }
+        }
+
+        // --- SISTEMA REELS/TIKTOK VIBES DE ALTA PERFORMANCE ---
+        let isVibesMuted = true;
+        let vibesObserver = null;
+        let vibesEngineInitialized = false;
+
+        function toggleVibesAudio(event) {
+            if (event) {
+                event.stopPropagation();
+                event.preventDefault();
+            }
+            
+            isVibesMuted = !isVibesMuted;
+            
+            // Sync all video elements' mute state
+            const videos = document.querySelectorAll('.vibes-card video');
+            videos.forEach(vid => {
+                vid.muted = isVibesMuted;
+            });
+            
+            // Dynamic premium UI feedback for audio button
+            document.querySelectorAll('.sound-toggle-btn').forEach(btn => {
+                const muteIcon = btn.querySelector('.mute-icon');
+                const unmuteIcon = btn.querySelector('.unmute-icon');
+                if (isVibesMuted) {
+                    muteIcon.classList.remove('hidden');
+                    unmuteIcon.classList.add('hidden');
+                } else {
+                    muteIcon.classList.add('hidden');
+                    unmuteIcon.classList.remove('hidden');
+                }
+            });
+            
+            showSuccessToast(isVibesMuted ? "Áudio Mutado" : "Áudio Ativado");
+        }
+
+        function initVibesEngine() {
+            if (vibesEngineInitialized) {
+                // Ensure audio icon reflects current state upon returning to the tab
+                document.querySelectorAll('.sound-toggle-btn').forEach(btn => {
+                    const muteIcon = btn.querySelector('.mute-icon');
+                    const unmuteIcon = btn.querySelector('.unmute-icon');
+                    if (isVibesMuted) {
+                        muteIcon.classList.remove('hidden');
+                        unmuteIcon.classList.add('hidden');
+                    } else {
+                        muteIcon.classList.add('hidden');
+                        unmuteIcon.classList.remove('hidden');
+                    }
+                });
+                
+                // Play active video
+                triggerVisibleVideoPlay();
+                return;
+            }
+            
+            vibesEngineInitialized = true;
+            
+            // --- 1. CONFIGURAR INTERSECTION OBSERVER (PLAY/PAUSE ON SCROLL) ---
+            const cards = document.querySelectorAll('.vibes-card');
+            const options = {
+                root: document.getElementById('vibes-scroll-container'),
+                threshold: 0.6 // Starts playing when card occupies at least 60% of viewport
+            };
+            
+            vibesObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    const video = entry.target.querySelector('video');
+                    const bar = entry.target.querySelector('.vibes-progress-bar');
+                    
+                    if (!video) return;
+                    
+                    if (entry.isIntersecting) {
+                        video.muted = isVibesMuted;
+                        
+                        // Handle browser autoplay policy elegantly
+                        const playPromise = video.play();
+                        if (playPromise !== undefined) {
+                            playPromise.catch(error => {
+                                console.log("Autoplay blocked, running muted fallback:", error);
+                                video.muted = true;
+                                video.play().catch(e => console.error("Fallback play failed:", e));
+                            });
+                        }
+                        
+                        // Real-time progress bar sync
+                        video.ontimeupdate = () => {
+                            if (video.duration) {
+                                const pct = (video.currentTime / video.duration) * 100;
+                                if (bar) bar.style.width = `${pct}%`;
+                            }
+                        };
+                    } else {
+                        video.pause();
+                        video.currentTime = 0; // Reset video to start
+                        video.ontimeupdate = null;
+                        if (bar) bar.style.width = '0%';
+                    }
+                });
+            }, options);
+            
+            cards.forEach(card => vibesObserver.observe(card));
+
+            // --- 2. DOUBLE CLICK / SINGLE TAP PARA PAUSAR E EXIBIR CORAÇÃO/PLAY ---
+            cards.forEach(card => {
+                const video = card.querySelector('video');
+                
+                card.addEventListener('click', (e) => {
+                    // Ignore clicks on actionable items like buttons or svg icons
+                    if (e.target.closest('button') || e.target.closest('a')) return;
+                    
+                    if (video.paused) {
+                        video.play().catch(err => console.log("Play blocked: ", err));
+                        showPlayPauseOverlay(card, 'play');
+                    } else {
+                        video.pause();
+                        showPlayPauseOverlay(card, 'pause');
+                    }
+                });
+            });
+            
+            lucide.createIcons();
+        }
+
+        // Helper triggers playing of currently visible video
+        function triggerVisibleVideoPlay() {
+            const container = document.getElementById('vibes-scroll-container');
+            const cards = document.querySelectorAll('.vibes-card');
+            cards.forEach(card => {
+                const rect = card.getBoundingClientRect();
+                const containerRect = container.getBoundingClientRect();
+                
+                // Check if card is visible inside container
+                const isVisible = (rect.top >= containerRect.top - 50 && rect.bottom <= containerRect.bottom + 50);
+                const video = card.querySelector('video');
+                
+                if (isVisible && video) {
+                    video.muted = isVibesMuted;
+                    video.play().catch(err => console.log("Autoplay failed on tab switch:", err));
+                }
+            });
+        }
+
+        // Immersive overlay animation on single-tap
+        function showPlayPauseOverlay(card, type) {
+            let overlay = card.querySelector('.play-pause-indicator');
+            if (!overlay) {
+                overlay = document.createElement('div');
+                overlay.className = "play-pause-indicator absolute inset-0 flex items-center justify-center z-40 pointer-events-none opacity-0 transition-all duration-300 transform scale-50";
+                overlay.innerHTML = `
+                    <div class="w-16 h-16 rounded-full bg-black/60 backdrop-blur-md flex items-center justify-center text-white">
+                        <i data-lucide="${type}" class="w-6 h-6"></i>
+                    </div>
+                `;
+                card.appendChild(overlay);
+                lucide.createIcons({
+                    attrs: { class: 'w-6 h-6' },
+                    nameAttr: 'data-lucide'
+                });
+            } else {
+                overlay.innerHTML = `
+                    <div class="w-16 h-16 rounded-full bg-black/60 backdrop-blur-md flex items-center justify-center text-white">
+                        <i data-lucide="${type}" class="w-6 h-6"></i>
+                    </div>
+                `;
+                lucide.createIcons({
+                    attrs: { class: 'w-6 h-6' },
+                    nameAttr: 'data-lucide'
+                });
+            }
+            
+            // Start scale up and fade in
+            overlay.classList.remove('opacity-0', 'scale-50');
+            overlay.classList.add('opacity-100', 'scale-110');
+            
+            setTimeout(() => {
+                overlay.classList.remove('opacity-100', 'scale-110');
+                overlay.classList.add('opacity-0', 'scale-50');
+            }, 600);
         }
 
         // --- LISTAGEM DE CASAS ---
