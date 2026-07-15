@@ -1044,7 +1044,18 @@
             const house = housesData.find(h => h.id === houseId);
             const view = document.getElementById('house-detail-view');
             
+            // Ocultar todas as outras possíveis abas e views
             document.getElementById('tab-discover-view').classList.add('hidden');
+            document.getElementById('tab-promos-view').classList.add('hidden');
+            document.getElementById('tab-reservas-view').classList.add('hidden');
+            document.getElementById('tab-vibes-view').classList.add('hidden');
+            document.getElementById('manager-dashboard-view').classList.add('hidden');
+            
+            // Pausa qualquer vídeo tocando ao sair do Vibes
+            document.querySelectorAll('.vibes-card video').forEach(vid => vid.pause());
+            document.body.style.overflow = ''; 
+            document.querySelector('header').classList.remove('hidden');
+
             view.classList.remove('hidden');
 
             let progHtml = '';
@@ -1670,8 +1681,8 @@
                         </div>
                         <div class="flex items-center justify-between pt-1">
                             <span class="text-[10px] font-bold text-white/50 tracking-wider uppercase font-heading">${prog.dia} — ${prog.horario}</span>
-                            <button onclick="openReservationModal('${prog.id}', '${house.id}')" class="px-5 py-2.5 rounded-[var(--button-radius)] text-xs uppercase tracking-widest font-heading transition-all shadow-lg active:scale-95 ${btnTextColor}" style="background-color: ${house.theme.primary}">
-                                ${house.categoria === 'bar' ? 'Reservar' : 'Garantir Lista'}
+                            <button onclick="openHouseDetail('${house.id}')" class="px-5 py-2.5 rounded-[var(--button-radius)] text-xs uppercase tracking-widest font-heading transition-all shadow-lg active:scale-95 ${btnTextColor}" style="background-color: ${house.theme.primary}">
+                                Ver Programação
                             </button>
                         </div>
                     </div>
