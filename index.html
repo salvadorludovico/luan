@@ -267,6 +267,7 @@
             {
                 id: "subcult",
                 nome: "SUBCULT",
+                categoria: "itinerante",
                 especialidade: "Techno, Hard Techno, Industrial",
                 setor: "Cervejaria Astúria",
                 instagram: "@subcult.go",
@@ -302,16 +303,17 @@
             {
                 id: "moi",
                 nome: "MÔI GOIÂNIA",
+                categoria: "bar",
                 especialidade: "Funk, Eletrônico, Hits",
                 setor: "Setor Bueno",
                 instagram: "@moigoiania",
                 theme: {
-                    bgApp: "#0d0e0a", // Tom escuro com toque verde-amarelado
-                    bgCard: "#13140f",
-                    borderColor: "#202216",
-                    primary: "#e7e900", // Cor limão/amarela e7e900 requisitada!
-                    secondary: "#85877c",
-                    accent: "#e7e900",
+                    bgApp: "#0f0805", // Tom de chocolate/madeira bem escura
+                    bgCard: "#190e09",
+                    borderColor: "#2d1a11",
+                    primary: "#552e0f", // Cor marrom de madeira 552e0f requisitada!
+                    secondary: "#9e8476",
+                    accent: "#552e0f",
                     fontHeading: "'Space Grotesk', sans-serif",
                     fontBody: "'Plus Jakarta Sans', sans-serif",
                     borderRadius: "1rem",
@@ -361,6 +363,7 @@
             {
                 id: "fluxo",
                 nome: "FLUXO BAR",
+                categoria: "boate",
                 especialidade: "Funk, Pop, Rap, Trap",
                 setor: "Setor Sul",
                 instagram: "@ofluxodegoiania",
@@ -396,6 +399,7 @@
             {
                 id: "cajuina",
                 nome: "CAJUÍNA",
+                categoria: "bar",
                 especialidade: "Pagode, Forró, Sertanejo",
                 setor: "Setor Sul",
                 instagram: "@cajuina.goiania",
@@ -431,6 +435,7 @@
             {
                 id: "mosaic",
                 nome: "MOSAIC",
+                categoria: "boate",
                 especialidade: "Pop, Eletropop, Hyperpop",
                 setor: "Setor Marista",
                 instagram: "@mosaic.goiania",
@@ -465,6 +470,7 @@
             {
                 id: "vernissage",
                 nome: "VERNISSAGE CLUB",
+                categoria: "boate",
                 especialidade: "Funk, Latin, Temático",
                 setor: "Setor Oeste",
                 instagram: "@vernissageclub",
@@ -492,6 +498,41 @@
                         entradaFree: "Portaria R$20",
                         promocoes: [
                             { nome: "Welcome Drink Espumante", descricao: "Até 23h30 para mulheres", tipo: "promo" }
+                        ]
+                    }
+                ]
+            },
+            {
+                id: "beatproibido",
+                nome: "BEAT PROIBIDO",
+                categoria: "itinerante",
+                especialidade: "Funk Carioca, Mandelão, Baile",
+                setor: "Espaços Alternativos",
+                instagram: "@beatproibido.go",
+                theme: {
+                    bgApp: "#0a030d", // Fundo roxo muito escuro
+                    bgCard: "#13061f",
+                    borderColor: "#250c3d",
+                    primary: "#c084fc", // Roxo neon vibrante para o Beat Proibido
+                    secondary: "#71717a",
+                    accent: "#d946ef",
+                    fontHeading: "'Space Grotesk', sans-serif",
+                    fontBody: "'Space Grotesk', sans-serif",
+                    borderRadius: "0.375rem",
+                    buttonRadius: "0.25rem",
+                    title: "Beat Proibido"
+                },
+                programacao: [
+                    {
+                        id: "beat-main",
+                        dia: "SÁBADO",
+                        nome: "BAILE DO BEAT",
+                        horario: "23h às 05h",
+                        djs: "BEAT CREW & CONVIDADOS",
+                        descricao: "O maior e mais quente baile de funk de Goiânia. Batidas aceleradas, mandelão e muito grave de favela.",
+                        entradaFree: "FREE NA LISTA ATÉ 00h | Após R$20",
+                        promocoes: [
+                            { nome: "Dobradinha de Copão de Whisky", descricao: "Até às 00h30", tipo: "promo" }
                         ]
                     }
                 ]
@@ -601,38 +642,65 @@
                 );
             }
 
-            filtered.forEach(house => {
-                const card = document.createElement('div');
-                card.className = "border p-5 rounded-[var(--border-radius)] space-y-4 hover:brightness-125 transition-all cursor-pointer group";
-                card.style.borderColor = `${house.theme.primary}25`; // 15% de opacidade da cor da marca
-                card.style.backgroundColor = house.theme.bgCard;
-                card.onclick = () => openHouseDetail(house.id);
+            // Categorias ordenadas conforme solicitado (Bares primeiro, Boates em seguida, Itinerantes ao final)
+            const categories = [
+                { id: "bar", title: "Bares Curados" },
+                { id: "boate", title: "Boates & Pistas" },
+                { id: "itinerante", title: "Festas Itinerantes & Ocupações" }
+            ];
 
-                card.innerHTML = `
-                    <div class="flex justify-between items-start">
-                        <div class="space-y-1">
-                            <h3 class="text-sm font-black tracking-tight uppercase font-heading" style="color: ${house.theme.primary}">${house.nome}</h3>
-                            <p class="text-[10px] text-neutral-500 uppercase tracking-widest font-medium font-heading">${house.especialidade}</p>
-                        </div>
-                        <span class="text-[10px] text-neutral-500 flex items-center space-x-1">
-                            <i data-lucide="map-pin" class="w-3.5 h-3.5 text-neutral-600"></i>
-                            <span class="font-medium font-heading uppercase tracking-wider text-[9px]">${house.setor}</span>
-                        </span>
-                    </div>
+            categories.forEach(cat => {
+                const catHouses = filtered.filter(h => h.categoria === cat.id);
+                if (catHouses.length > 0) {
+                    // Cabeçalho elegante da Seção
+                    const sectionHeader = document.createElement('div');
+                    sectionHeader.className = "pt-4 pb-1 border-b border-theme-border flex items-center justify-between";
+                    sectionHeader.innerHTML = `
+                        <h3 class="text-[9px] uppercase tracking-[0.25em] font-black text-neutral-500 font-heading">${cat.title}</h3>
+                        <span class="text-[8px] text-neutral-600 font-mono">${catHouses.length} locais</span>
+                    `;
+                    container.appendChild(sectionHeader);
 
-                    <div class="flex justify-between items-center pt-3 border-t" style="border-color: ${house.theme.primary}15">
-                        <span class="text-[10px] text-neutral-500 flex items-center space-x-1 font-mono">
-                            <i data-lucide="instagram" class="w-3 h-3" style="color: ${house.theme.primary}"></i>
-                            <span>${house.instagram}</span>
-                        </span>
-                        <div class="flex items-center space-x-1 text-[10px] uppercase font-bold tracking-wider" style="color: ${house.theme.primary}">
-                            <span>Ver Programação</span>
-                            <i data-lucide="chevron-right" class="w-3.5 h-3.5"></i>
-                        </div>
-                    </div>
-                `;
-                container.appendChild(card);
+                    // Grid com espaçamento de 4 para os cartões
+                    const sectionGrid = document.createElement('div');
+                    sectionGrid.className = "space-y-4 pt-3 pb-2";
+
+                    catHouses.forEach(house => {
+                        const card = document.createElement('div');
+                        card.className = "border p-5 rounded-[var(--border-radius)] space-y-4 hover:brightness-125 transition-all cursor-pointer group";
+                        card.style.borderColor = `${house.theme.primary}25`; // 15% de opacidade da cor da marca
+                        card.style.backgroundColor = house.theme.bgCard;
+                        card.onclick = () => openHouseDetail(house.id);
+
+                        card.innerHTML = `
+                            <div class="flex justify-between items-start">
+                                <div class="space-y-1">
+                                    <h3 class="text-sm font-black tracking-tight uppercase font-heading" style="color: ${house.theme.primary}">${house.nome}</h3>
+                                    <p class="text-[10px] text-neutral-500 uppercase tracking-widest font-medium font-heading">${house.especialidade}</p>
+                                </div>
+                                <span class="text-[10px] text-neutral-500 flex items-center space-x-1">
+                                    <i data-lucide="map-pin" class="w-3.5 h-3.5 text-neutral-600"></i>
+                                    <span class="font-medium font-heading uppercase tracking-wider text-[9px]">${house.setor}</span>
+                                </span>
+                            </div>
+
+                            <div class="flex justify-between items-center pt-3 border-t" style="border-color: ${house.theme.primary}15">
+                                <span class="text-[10px] text-neutral-500 flex items-center space-x-1 font-mono">
+                                    <i data-lucide="instagram" class="w-3 h-3" style="color: ${house.theme.primary}"></i>
+                                    <span>${house.instagram}</span>
+                                </span>
+                                <div class="flex items-center space-x-1 text-[10px] uppercase font-bold tracking-wider" style="color: ${house.theme.primary}">
+                                    <span>Ver Programação</span>
+                                    <i data-lucide="chevron-right" class="w-3.5 h-3.5"></i>
+                                </div>
+                            </div>
+                        `;
+                        sectionGrid.appendChild(card);
+                    });
+                    container.appendChild(sectionGrid);
+                }
             });
+
             lucide.createIcons();
         }
 
