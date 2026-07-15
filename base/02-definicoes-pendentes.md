@@ -279,7 +279,7 @@
 
 ---
 
-### 🎧 SOBRE ATRAÇÕES/ARTISTAS PARCEIROS (Ex: Beat Proibido)
+### 🎧 SOBRE ATRAÇÕES, FESTAS ITINERANTES E PARCEIROS (Ex: Beat Proibido, Cultura Subcult)
 
 #### Fluxo de Divulgação
 - [ ] **Como serão exibidos os eventos de artistas como o Beat Proibido?**
@@ -287,13 +287,27 @@
   - O perfil do artista terá uma página dedicada listando sua agenda de shows?
   - Haverá link direto para as reservas da casa onde eles vão tocar?
 
-- [ ] **Como diferenciar claramente uma atração de uma casa física?**
-  - Badge visual ("Atração", "DJ Duo", etc.) para evitar que o usuário tente reservar o "Beat Proibido" como se fosse uma casa física.
-  - Mensagem explicativa no perfil do artista informando que se trata de uma atração/dupla de DJs e direcionando para as casas noturnas onde ocorrerão as apresentações.
+- [ ] **Como gerenciar festas itinerantes de nicho (Ex: Cultura Subcult)?**
+  - Como exibir locais não convencionais/industriais (ex: Fábrica Inacabada Astúria) de forma clara no GPS/mapa?
+  - Direcionamento para vendas externas de ingressos (ex: link do Sympla) em vez do sistema de reservas interna padrão do app.
+  - Permitir links de redes sociais e canais oficiais de comunicação rápida (ex: linktree ou grupo oficial de WhatsApp no perfil da festa para liberação de lotes)?
 
-- [ ] **Gerenciamento do perfil do artista:**
-  - O próprio Luan/Beat Proibido terá um acesso de "Gerente de Artista" para atualizar sua agenda?
-  - Ou os eventos de show serão criados e vinculados pelos gerentes das casas onde eles tocarão?
+- [ ] **Como diferenciar claramente uma atração/festa itinerante de uma casa física fixa?**
+  - Badge visual explicativo ("Atração", "Festa Itinerante", "DJ Duo", etc.) para evitar que o usuário tente reservar um "Beat Proibido" ou "Cultura Subcult" como se fossem locais físicos fixos.
+  - Mensagens informativas nas páginas desses perfis explicando sua natureza de evento temporário/itinerante.
+
+- [ ] **Gerenciamento dos perfis de marcas e artistas:**
+  - O próprio Luan/Beat Proibido e os organizadores da Cultura Subcult terão acesso a um painel de "Gerente de Evento/Artista" para atualizarem suas datas e informações?
+  - Ou essas agendas serão centralizadas pelos administradores do app ou vinculadas pelas casas físicas parceiras?
+
+---
+
+### 👤 SOBRE O PERFIL DO CO-CRIADOR (Luan S. Barbosa - @luan.sbarbosa)
+
+- [ ] **Onde e como exibir os créditos do Luan no aplicativo?**
+  - Terá uma seção "Sobre o App" ou "Idealizado por" no menu de configurações/perfil?
+  - Link direto para o Instagram do Luan no rodapé/créditos?
+  - Ele terá um perfil diferenciado na plataforma (ex: badge ou marcação de "Co-Criador/Admin")?
 
 ---
 
@@ -306,7 +320,7 @@
 - [ ] Perguntar pelos problemas atuais (não só apresentar solução)
 - [ ] Validar se as 6 casas estão 100% interessadas ou só algumas
 - [ ] Deixar claro: MVP é rápido, depois evolui
-- [ ] Discutir o fluxo de promoção de artistas/atrações (Beat Proibido) no app e como as agendas serão cadastradas.
+- [ ] Discutir o fluxo de promoção de artistas/atrações (Beat Proibido), marcas de festas itinerantes (Cultura Subcult) no app e a integração dos créditos do co-criador (Luan).
 
 ---
 

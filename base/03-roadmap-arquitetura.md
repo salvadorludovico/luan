@@ -246,11 +246,12 @@
 
 ---
 
-#### 2.4 Apoio a Atrações/Artistas Independentes (Ex: Beat Proibido)
-- [ ] Cadastro de perfis de artistas (imagem, biografia, redes sociais)
-- [ ] Implementar feed de shows do artista (vinculado às casas)
-- [ ] Badge visual ("Atração Parceira") para diferenciar de estabelecimento físico
-- [ ] Fluxo para direcionamento automático de reserva para a casa que sedia o show
+#### 2.4 Apoio a Atrações, Festas Itinerantes e Produtores (Ex: Beat Proibido, Cultura Subcult)
+- [ ] Cadastro de perfis de artistas e festas (imagem, biografia, redes sociais, grupos oficiais)
+- [ ] Implementar feed de shows e edições (vinculado às casas ou locais temporários)
+- [ ] Badge visual ("Atração Parceira", "Festa Itinerante") para diferenciar de estabelecimento físico fixo
+- [ ] Fluxo para direcionamento para links de vendas externos (ex: Sympla, Eventbrite)
+- [ ] Tela/Seção de Créditos & Idealização no app integrando o perfil do Luan (@luan.sbarbosa)
 
 ---
 

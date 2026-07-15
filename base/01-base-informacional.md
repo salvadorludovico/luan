@@ -2,9 +2,11 @@
 
 ## 📋 Resumo Executivo
 
-Projeto de desenvolvimento de aplicativo mobile/web para gerenciar **programação**, **promoções** e **reservas** de casas noturnas e bares em Goiânia. O app consolida informações dispersas em Instagram e WhatsApp em uma plataforma centralizada.
+Projeto de desenvolvimento de aplicativo mobile/web para gerenciar **programação**, **promoções** e **reservas** de casas noturnas, bares e eventos em Goiânia. O app consolida informações dispersas em Instagram e WhatsApp em uma plataforma centralizada.
 
-**Objetivo Principal:** Simplificar a descoberta de eventos e facilitando as reservas para clientes, enquanto oferece dados e controle para os gerentes das casas.
+**Objetivo Principal:** Simplificar a descoberta de eventos e facilitando as reservas para clientes, enquanto oferece dados e controle para os gerentes das casas e produtores de festas.
+
+**Idealização e Co-Criação:** Luan S. Barbosa ([@luan.sbarbosa](https://www.instagram.com/luan.sbarbosa/))
 
 ---
 
@@ -66,15 +68,16 @@ Sistema de confirmação de presença nas casas
 
 ---
 
-## 🎧 Atrações e Artistas Parceiros
+## 🎧 Atrações, Festas e Artistas Parceiros
 
-Além de casas noturnas e bares físicos, o sistema também divulgará a agenda de atrações e artistas parceiros de relevância. 
+Além de casas noturnas e bares físicos, o sistema também divulgará a agenda de atrações, marcas de festas e artistas parceiros de relevância. 
 
-**Nota importante:** Não se comportam como uma casa noturna física (não possuem reservas diretas no local/estabelecimento próprio), mas terão suas apresentações e eventos individuais divulgados na plataforma para direcionar o público aos locais onde estarão tocando.
+**Nota importante:** Não se comportam como uma casa noturna física fixa (não possuem reservas diretas no local/estabelecimento próprio), mas terão suas apresentações e edições individuais divulgadas na plataforma para direcionar o público aos locais e vendas de ingressos correspondentes.
 
-| Atração / Artista | Instagram | Tipo / Gênero | Observações |
+| Atração / Festa / Artista | Instagram | Tipo / Gênero | Observações |
 |---|---|---|---|
-| **Beat Proibido** | [@beatproibido](https://www.instagram.com/beatproibido/) | Funk & Bruxaria (Duo de DJs do Luan) | *Não é uma casa física.* Divulgação das datas e locais dos shows/eventos onde se apresentam. |
+| **Beat Proibido** | [@beatproibido](https://www.instagram.com/beatproibido/) | Funk & Bruxaria (Duo de DJs do Luan) | *Atração (Duo de DJs).* Divulgação das datas e locais dos shows/eventos onde se apresentam. |
+| **Cultura Subcult** | [@cultura.subcult](https://www.instagram.com/cultura.subcult/) | Festa Eletrônica Underground (Hard Techno, Acid, Industrial) | *Festa Itinerante.* Focada em cultura de ocupação urbana de espaços industriais. Divulgação de edições, locais de ocupação e venda de ingressos (ex: Sympla). |
 
 ---
 
