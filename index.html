@@ -108,8 +108,12 @@
         
         <!-- Header Minimalista -->
         <header class="px-6 py-5 flex justify-between items-center border-b border-theme-border bg-theme-bg/85 backdrop-blur-md sticky top-0 z-40 theme-transition">
-            <div class="space-y-0.5">
-                <span class="text-[9px] tracking-[0.2em] uppercase font-bold text-neutral-500 font-heading">Curadoria</span>
+            <!-- Seletor de Vibe Interativo no Título -->
+            <div onclick="toggleVibeSelector(event)" class="space-y-0.5 cursor-pointer group flex flex-col justify-start">
+                <span class="text-[9px] tracking-[0.2em] uppercase font-bold text-neutral-500 font-heading group-hover:text-theme-primary transition-colors flex items-center">
+                    <span>Curadoria</span>
+                    <i data-lucide="chevron-down" class="w-2.5 h-2.5 ml-1 text-neutral-600 group-hover:text-theme-primary transition-colors"></i>
+                </span>
                 <h1 class="text-sm font-bold tracking-tight font-heading text-theme-primary" id="header-title">LUAN</h1>
             </div>
             
@@ -119,6 +123,14 @@
                 <span class="text-[9px] uppercase tracking-wider font-semibold font-heading text-neutral-400" id="role-text">Cliente</span>
             </button>
         </header>
+
+        <!-- DROPDOWN SELETOR DE VIBE (HEADER) -->
+        <div id="vibe-selector-dropdown" class="absolute top-20 left-6 right-6 bg-neutral-950 border border-theme-border rounded-[var(--border-radius)] shadow-2xl p-4 z-50 hidden transition-all duration-300">
+            <div class="text-[8px] uppercase tracking-[0.2em] font-black text-neutral-500 font-heading pb-2 border-b border-theme-border mb-3">Ativar Vibe / Identidade</div>
+            <div class="grid grid-cols-2 gap-2" id="vibe-dropdown-list">
+                <!-- Gerado dinamicamente para incluir as casas + voltar para "Geral" -->
+            </div>
+        </div>
 
         <!-- CONTEÚDO PRINCIPAL (Scroll Natural do Navegador - Resolve o bug do celular) -->
         <main class="flex-1 px-6 py-6 space-y-8 relative">
@@ -1023,6 +1035,8 @@
                     `;
                 });
 
+                const actionBtnText = house.categoria === 'bar' ? 'Reservar Mesa' : 'Adicionar Nome';
+
                 progHtml += `
                     <div class="border border-theme-border bg-theme-card p-5 rounded-[var(--border-radius)] space-y-4">
                         <div class="flex justify-between items-start border-b border-theme-border pb-3">
@@ -1049,7 +1063,7 @@
                         <div class="flex justify-between items-center pt-3 border-t border-theme-border">
                             <span class="text-[9px] font-bold text-neutral-500 tracking-wider uppercase font-heading">${p.entradaFree}</span>
                             <button onclick="openReservationModal('${p.id}', '${house.id}')" class="bg-white hover:bg-neutral-200 text-black px-4 py-2 rounded-[var(--button-radius)] text-[10px] font-bold uppercase tracking-wider font-heading">
-                                Adicionar Nome
+                                ${actionBtnText}
                             </button>
                         </div>
                     </div>
@@ -1180,15 +1194,30 @@
         }
 
         // --- MOTOR DE RESERVAS ---
-        function openReservationModal(eventId, houseId) {
+         function openReservationModal(eventId, houseId) {
             const house = housesData.find(h => h.id === houseId);
             const p = house.programacao.find(prog => prog.id === eventId);
             
-            document.getElementById('modal-event-title').innerText = p.nome;
+            const isBar = house.categoria === 'bar';
+            const modalTitle = isBar ? `Reservar Mesa: ${p.nome}` : `Nome na Lista: ${p.nome}`;
+            const actionText = isBar ? 'Confirmar Reserva de Mesa' : 'Confirmar Entrada na Lista';
+            
+            document.getElementById('modal-event-title').innerText = modalTitle;
             document.getElementById('modal-house-title').innerText = house.nome;
             document.getElementById('modal-event-id').value = eventId;
             document.getElementById('modal-house-id').value = houseId;
-            document.getElementById('modal-event-rules').innerText = `Entrada e validade do nome na portaria: ${p.entradaFree}.`;
+            
+            const defaultRules = isBar 
+                ? `A reserva de mesa é gratuita e válida por até 30 minutos após o início do evento. Sujeito a disponibilidade.`
+                : `Entrada e validade do nome na portaria: ${p.entradaFree}.`;
+            
+            document.getElementById('modal-event-rules').innerText = defaultRules;
+
+            // Altera o texto do botão de envio no modal
+            const submitBtn = document.querySelector('#reservation-form button[type="submit"]');
+            if (submitBtn) {
+                submitBtn.innerHTML = `<span>${actionText}</span>`;
+            }
 
             document.getElementById('reservation-modal').classList.remove('hidden');
             
@@ -1481,6 +1510,70 @@
                 openManagerDashboard();
             }
         }
+
+        // --- SISTEMA DE SELETOR DE VIBE NO HEADER (DROP DOWN) ---
+        function toggleVibeSelector(event) {
+            if (event) event.stopPropagation();
+            const dropdown = document.getElementById('vibe-selector-dropdown');
+            if (!dropdown) return;
+            
+            const isHidden = dropdown.classList.contains('hidden');
+            if (isHidden) {
+                renderVibeSelectorList();
+                dropdown.classList.remove('hidden');
+            } else {
+                dropdown.classList.add('hidden');
+            }
+        }
+        
+        function renderVibeSelectorList() {
+            const listContainer = document.getElementById('vibe-dropdown-list');
+            if (!listContainer) return;
+            
+            listContainer.innerHTML = '';
+            
+            // Opção 1: Geral / LUAN
+            const generalBtn = document.createElement('button');
+            generalBtn.onclick = (e) => {
+                e.stopPropagation();
+                applyTheme('default');
+                activeHouseId = null;
+                document.getElementById('vibe-selector-dropdown').classList.add('hidden');
+                switchTab('discover');
+            };
+            generalBtn.className = "flex items-center space-x-2 p-2 border border-neutral-800 hover:border-neutral-600 rounded bg-neutral-900/40 text-[10px] uppercase font-bold tracking-wider font-heading text-white transition-all text-left w-full";
+            generalBtn.innerHTML = `
+                <span class="w-1.5 h-1.5 rounded-full bg-white shrink-0"></span>
+                <span class="truncate">Geral / LUAN</span>
+            `;
+            listContainer.appendChild(generalBtn);
+            
+            // Outras Opções: Cada casa noturna da base
+            housesData.forEach(house => {
+                const btn = document.createElement('button');
+                btn.onclick = (e) => {
+                    e.stopPropagation();
+                    document.getElementById('vibe-selector-dropdown').classList.add('hidden');
+                    openHouseDetail(house.id);
+                };
+                btn.className = "flex items-center space-x-2 p-2 border hover:brightness-125 rounded text-[10px] uppercase font-bold tracking-wider font-heading text-white transition-all text-left w-full";
+                btn.style.borderColor = `${house.theme.primary}30`;
+                btn.style.backgroundColor = house.theme.bgCard;
+                btn.innerHTML = `
+                    <span class="w-1.5 h-1.5 rounded-full shrink-0" style="background-color: ${house.theme.primary}"></span>
+                    <span class="truncate" style="color: ${house.theme.primary}">${house.nome.replace(" GOIÂNIA", "").replace(" BAR", "").replace(" CLUB", "")}</span>
+                `;
+                listContainer.appendChild(btn);
+            });
+        }
+        
+        // Fechar dropdown ao clicar fora
+        window.addEventListener('click', () => {
+            const dropdown = document.getElementById('vibe-selector-dropdown');
+            if (dropdown && !dropdown.classList.contains('hidden')) {
+                dropdown.classList.add('hidden');
+            }
+        });
 
         // --- MOTOR DE DETECÇÃO E PROCESSAMENTO DINÂMICO DO VIBES (TikTok de Baladas) ---
         function isHexColorLight(hex) {
