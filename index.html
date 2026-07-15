@@ -1081,15 +1081,9 @@
                         card.innerHTML = `
                             <div class="flex justify-between items-start">
                                 <div class="flex items-center space-x-3">
-                                    <!-- Container do Logo -->
+                                    <!-- Container do Logo (Ocultado se a imagem falhar/não existir) -->
                                     <div class="w-10 h-10 rounded-full overflow-hidden border shrink-0 flex items-center justify-center relative" style="border-color: ${house.theme.primary}30; background-color: ${house.theme.bgCard}">
-                                        <!-- Logo real (se existir na pasta) -->
-                                        <img src="Logo Casas/${house.id}.png" onerror="this.classList.add('hidden'); this.nextElementSibling.classList.remove('hidden')" class="w-full h-full object-cover">
-                                        
-                                        <!-- Fallback: Letra Inicial Minimalista estilizada -->
-                                        <div class="hidden w-full h-full flex items-center justify-center text-xs font-black font-heading" style="color: ${house.theme.primary}">
-                                            ${house.nome.substring(0, 2).toUpperCase()}
-                                        </div>
+                                        <img src="logo-casas/${house.id}.png" onerror="this.parentElement.classList.add('hidden')" class="w-full h-full object-cover">
                                     </div>
                                     
                                     <div class="space-y-1">
@@ -1195,15 +1189,9 @@
                 <!-- Infos da Casa -->
                 <div class="border border-theme-border bg-theme-card p-6 rounded-[var(--border-radius)]">
                     <div class="flex items-center space-x-4">
-                        <!-- Container do Logo -->
+                        <!-- Container do Logo (Ocultado se a imagem falhar/não existir) -->
                         <div class="w-12 h-12 rounded-full overflow-hidden border shrink-0 flex items-center justify-center relative" style="border-color: ${house.theme.primary}30; background-color: ${house.theme.bgCard}">
-                            <!-- Logo real (se existir na pasta) -->
-                            <img src="Logo Casas/${house.id}.png" onerror="this.classList.add('hidden'); this.nextElementSibling.classList.remove('hidden')" class="w-full h-full object-cover">
-                            
-                            <!-- Fallback: Letra Inicial Minimalista estilizada -->
-                            <div class="hidden w-full h-full flex items-center justify-center text-sm font-black font-heading" style="color: ${house.theme.primary}">
-                                ${house.nome.substring(0, 2).toUpperCase()}
-                            </div>
+                            <img src="logo-casas/${house.id}.png" onerror="this.parentElement.classList.add('hidden')" class="w-full h-full object-cover">
                         </div>
                         
                         <div class="space-y-1">
