@@ -505,7 +505,8 @@
                             { nome: "Dobradinha Gin & Tônica", descricao: "Válida até 23h59", tipo: "promo" }
                         ]
                     }
-                ]
+                ],
+                videoUrl: "https://player.vimeo.com/external/403816439.sd.mp4?s=d4f40d6c543fbfd63ba4f4058f4a13d7d74b830d&profile_id=165&oauth2_token_id=57447761"
             },
             {
                 id: "moi",
@@ -565,7 +566,8 @@
                             { nome: "Chá de Rolezeiro 2 por R$40", descricao: "Até às 21h", tipo: "promo" }
                         ]
                     }
-                ]
+                ],
+                videoUrl: "https://player.vimeo.com/external/554141695.sd.mp4?s=67a840003058097b6927da8e5473cf797e8ec9cb&profile_id=165&oauth2_token_id=57447761"
             },
             {
                 id: "fluxo",
@@ -601,7 +603,8 @@
                             { nome: "Combo de Vodka 10% OFF", descricao: "A noite toda", tipo: "promo" }
                         ]
                     }
-                ]
+                ],
+                videoUrl: "https://player.vimeo.com/external/491028711.sd.mp4?s=2d7f8d6f51954129df4b4fcf7f897df2efc4d2d4&profile_id=165&oauth2_token_id=57447761"
             },
             {
                 id: "cajuina",
@@ -682,12 +685,12 @@
                 setor: "Setor Oeste",
                 instagram: "@vernissageclub",
                 theme: {
-                    bgApp: "#050102", // Fundo carmim preto absoluto
-                    bgCard: "#0d0407", // Cartão vinho ultra escuro
-                    borderColor: "#1c090e",
-                    primary: "#fda4af", // Soft Rose
-                    secondary: "#a1a1aa",
-                    accent: "#e11d48",
+                    bgApp: "#030206", // Quase preto roxo
+                    bgCard: "#090512", // Cartão violeta muito escuro
+                    borderColor: "#160d29",
+                    primary: "#8142f0", // Roxo luxuoso #8142f0 requisitado!
+                    secondary: "#94a3b8",
+                    accent: "#8142f0",
                     fontHeading: "'Playfair Display', serif",
                     fontBody: "'Plus Jakarta Sans', sans-serif",
                     borderRadius: "0.5rem",
@@ -708,6 +711,42 @@
                         ]
                     }
                 ]
+            },
+            {
+                id: "point",
+                nome: "POINT GOIÂNIA",
+                categoria: "boate",
+                especialidade: "Funk, Baile, Eventos Especiais",
+                setor: "Bueno",
+                instagram: "@pointgoiania",
+                theme: {
+                    bgApp: "#050200", // Fundo laranja-preto profundo
+                    bgCard: "#0f0800", // Cartão cobre ultra escuro
+                    borderColor: "#211100",
+                    primary: "#f37f01", // Laranja f37f01 requisitado!
+                    secondary: "#a1a1aa",
+                    accent: "#f37f01",
+                    fontHeading: "'Space Grotesk', sans-serif",
+                    fontBody: "'Plus Jakarta Sans', sans-serif",
+                    borderRadius: "0.5rem",
+                    buttonRadius: "0.375rem",
+                    title: "Point Baile"
+                },
+                programacao: [
+                    {
+                        id: "point-main",
+                        dia: "SEXTA",
+                        nome: "O BAILE DO POINT",
+                        horario: "22h às 05h",
+                        djs: "DJS CONVIDADOS & POINT CREW",
+                        descricao: "O baile funk mais falado de Goiânia. Setores climatizados, som pesado e os maiores sucessos do funk nacional.",
+                        entradaFree: "FREE NA LISTA ATÉ 23h | Após R$15",
+                        promocoes: [
+                            { nome: "Dobradinha de Copão de Gin", descricao: "Válido até 00h", tipo: "promo" }
+                        ]
+                    }
+                ],
+                videoUrl: "https://player.vimeo.com/external/403844833.sd.mp4?s=cf8a6797cb3a0d500ff22ec25da06c641cc9a6e1&profile_id=165&oauth2_token_id=57447761"
             },
             {
                 id: "beatproibido",
@@ -742,7 +781,8 @@
                             { nome: "Dobradinha de Copão de Whisky", descricao: "Até às 00h30", tipo: "promo" }
                         ]
                     }
-                ]
+                ],
+                videoUrl: "https://player.vimeo.com/external/435643226.sd.mp4?s=89bf26909873099951664e43fec14775d710b370&profile_id=165&oauth2_token_id=57447761"
             }
         ];
 
@@ -890,6 +930,10 @@
         }
 
         function initVibesEngine() {
+            if (!vibesEngineInitialized) {
+                renderVibes(); // Renderiza dinamicamente as mídias da base centralizada!
+            }
+            
             if (vibesEngineInitialized) {
                 // Ensure audio icon reflects current state upon returning to the tab
                 document.querySelectorAll('.sound-toggle-btn').forEach(btn => {
@@ -1083,7 +1127,7 @@
                                 <div class="flex items-center space-x-3">
                                     <!-- Container do Logo (Ocultado se a imagem falhar/não existir) -->
                                     <div class="w-10 h-10 rounded-full overflow-hidden border shrink-0 flex items-center justify-center relative" style="border-color: ${house.theme.primary}30; background-color: ${house.theme.bgCard}">
-                                        <img src="logo-casas/${house.id}.png" onerror="this.parentElement.classList.add('hidden')" class="w-full h-full object-cover">
+                                        <img src="logo-casas/${house.id}.jpg" onerror="this.parentElement.classList.add('hidden')" class="w-full h-full object-cover">
                                     </div>
                                     
                                     <div class="space-y-1">
@@ -1191,7 +1235,7 @@
                     <div class="flex items-center space-x-4">
                         <!-- Container do Logo (Ocultado se a imagem falhar/não existir) -->
                         <div class="w-12 h-12 rounded-full overflow-hidden border shrink-0 flex items-center justify-center relative" style="border-color: ${house.theme.primary}30; background-color: ${house.theme.bgCard}">
-                            <img src="logo-casas/${house.id}.png" onerror="this.parentElement.classList.add('hidden')" class="w-full h-full object-cover">
+                            <img src="logo-casas/${house.id}.jpg" onerror="this.parentElement.classList.add('hidden')" class="w-full h-full object-cover">
                         </div>
                         
                         <div class="space-y-1">
@@ -1603,6 +1647,88 @@
                 showSuccessToast("Entrada Validada");
                 openManagerDashboard();
             }
+        }
+
+        // --- MOTOR DE DETECÇÃO E PROCESSAMENTO DINÂMICO DO VIBES (TikTok de Baladas) ---
+        function isHexColorLight(hex) {
+            if (!hex) return false;
+            const c = hex.substring(1);
+            const rgb = parseInt(c, 16);
+            const r = (rgb >> 16) & 0xff;
+            const g = (rgb >> 8) & 0xff;
+            const b = (rgb >> 0) & 0xff;
+            const luma = 0.2126 * r + 0.7152 * g + 0.0722 * b;
+            return luma > 140; // Se a luminosidade for alta, a cor é clara (precisa de texto preto no botão/tag)
+        }
+
+        function renderVibes() {
+            const container = document.getElementById('vibes-scroll-container');
+            if (!container) return;
+            
+            container.innerHTML = '';
+            
+            // Filtra as casas do banco de dados que possuem um vídeo associado
+            const videoHouses = housesData.filter(h => h.videoUrl);
+            
+            videoHouses.forEach((house, index) => {
+                const prog = house.programacao[0]; // Pega o evento principal cadastrado
+                if (!prog) return;
+                
+                const card = document.createElement('div');
+                card.className = "snap-start w-full h-full relative bg-black flex items-center justify-center overflow-hidden vibes-card";
+                card.setAttribute('data-house', house.id);
+                card.setAttribute('data-event', prog.id);
+                
+                const isColorLight = isHexColorLight(house.theme.primary);
+                const btnTextColor = isColorLight ? 'text-black font-black' : 'text-white font-bold';
+                
+                card.innerHTML = `
+                    <video class="absolute inset-0 w-full h-full object-cover" loop playsinline muted src="${house.videoUrl}"></video>
+                    
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/95 via-black/40 to-black/20 pointer-events-none"></div>
+                    
+                    <button onclick="toggleVibesAudio(event)" class="absolute top-6 right-6 z-40 w-10 h-10 rounded-full bg-black/40 border border-white/10 flex items-center justify-center text-white backdrop-blur-md hover:bg-black/60 transition-all sound-toggle-btn">
+                        <i data-lucide="volume-x" class="w-4 h-4 mute-icon"></i>
+                        <i data-lucide="volume-2" class="w-4 h-4 unmute-icon hidden"></i>
+                    </button>
+
+                    ${index === 0 ? `
+                    <div class="absolute top-6 left-1/2 -translate-x-1/2 z-40 flex flex-col items-center space-y-1 pointer-events-none opacity-40 animate-pulse">
+                        <span class="text-[8px] uppercase tracking-[0.2em] text-white font-bold">Vibes LUAN</span>
+                        <i data-lucide="chevron-down" class="w-3.5 h-3.5 text-white"></i>
+                    </div>` : ''}
+                    
+                    <div class="absolute bottom-6 inset-x-0 px-6 z-40 space-y-4">
+                        <div class="space-y-2">
+                            <div class="flex items-center space-x-2">
+                                <span class="text-[9px] font-black font-heading px-2 py-0.5 rounded uppercase tracking-wider" style="background-color: ${house.theme.primary}; color: ${isColorLight ? '#000000' : '#ffffff'}">
+                                    ${house.nome}
+                                </span>
+                                <span class="text-[9px] text-white/60 font-medium uppercase tracking-wider font-heading">${house.especialidade}</span>
+                            </div>
+                            <div class="space-y-1">
+                                <h3 class="text-base font-black text-white font-heading uppercase tracking-tight leading-tight">${prog.nome}</h3>
+                                <p class="text-xs text-white/80 leading-relaxed max-w-[85%] font-light">${prog.descricao}</p>
+                            </div>
+                            <div class="flex items-center space-x-1.5 text-xs text-white/70">
+                                <i data-lucide="music" class="w-3.5 h-3.5 text-white/60"></i>
+                                <span class="font-mono text-[10px] uppercase truncate max-w-[80%]">${prog.djs}</span>
+                            </div>
+                        </div>
+                        <div class="flex items-center justify-between pt-1">
+                            <span class="text-[10px] font-bold text-white/50 tracking-wider uppercase font-heading">${prog.dia} — ${prog.horario}</span>
+                            <button onclick="openReservationModal('${prog.id}', '${house.id}')" class="px-5 py-2.5 rounded-[var(--button-radius)] text-xs uppercase tracking-widest font-heading transition-all shadow-lg active:scale-95 ${btnTextColor}" style="background-color: ${house.theme.primary}">
+                                ${house.categoria === 'bar' ? 'Reservar' : 'Garantir Lista'}
+                            </button>
+                        </div>
+                    </div>
+                    <div class="absolute bottom-0 left-0 right-0 h-[2.5px] bg-white/20">
+                        <div class="h-full transition-all duration-100 ease-linear vibes-progress-bar" style="width: 0%; background-color: ${house.theme.primary}"></div>
+                    </div>
+                `;
+                container.appendChild(card);
+            });
+            lucide.createIcons();
         }
     </script>
 </body>
