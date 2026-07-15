@@ -144,6 +144,11 @@
                     <p class="text-xs text-neutral-500">Benefícios ativos nas casas para a noite de hoje.</p>
                 </div>
 
+                <!-- Filtro por Casa nos Benefícios -->
+                <div class="flex space-x-2 overflow-x-auto no-scrollbar pb-1" id="promos-house-filters">
+                    <!-- Gerado dinamicamente via JS -->
+                </div>
+
                 <div class="space-y-4" id="promos-list-container">
                     <!-- Gerado dinamicamente -->
                 </div>
@@ -510,12 +515,12 @@
                 setor: "Espaços Alternativos",
                 instagram: "@beatproibido.go",
                 theme: {
-                    bgApp: "#0a030d", // Fundo roxo muito escuro
-                    bgCard: "#13061f",
-                    borderColor: "#250c3d",
-                    primary: "#c084fc", // Roxo neon vibrante para o Beat Proibido
-                    secondary: "#71717a",
-                    accent: "#d946ef",
+                    bgApp: "#050000", // Fundo vermelho escuro/preto absoluto
+                    bgCard: "#100303",
+                    borderColor: "#210909",
+                    primary: "#fe0000", // Vermelhão bruto fe0000 requisitado!
+                    secondary: "#7e6d6d",
+                    accent: "#fe0000",
                     fontHeading: "'Space Grotesk', sans-serif",
                     fontBody: "'Space Grotesk', sans-serif",
                     borderRadius: "0.375rem",
@@ -548,6 +553,7 @@
         // Inicializar
         window.addEventListener('DOMContentLoaded', () => {
             renderHouses();
+            renderPromoFilters();
             renderGlobalPromos();
             updateReservasUI();
             lucide.createIcons();
@@ -805,34 +811,82 @@
         }
 
         // --- PROMOÇÕES GLOBAIS ---
-        function renderGlobalPromos() {
+        function renderPromoFilters() {
+            const filterContainer = document.getElementById('promos-house-filters');
+            if (!filterContainer) return;
+            
+            filterContainer.innerHTML = '';
+            
+            // Botão "Todos"
+            const allBtn = document.createElement('button');
+            allBtn.onclick = () => filterPromosByHouse('todos', allBtn);
+            allBtn.className = "promo-filter-tag px-3.5 py-1.5 bg-white text-black text-[9px] font-black uppercase tracking-widest rounded-full shrink-0 transition-all border border-transparent";
+            allBtn.innerText = "Todos";
+            filterContainer.appendChild(allBtn);
+            
+            housesData.forEach(house => {
+                const btn = document.createElement('button');
+                btn.onclick = () => filterPromosByHouse(house.id, btn);
+                btn.className = "promo-filter-tag px-3.5 py-1.5 bg-theme-card border border-theme-border text-neutral-400 text-[9px] font-black uppercase tracking-widest rounded-full shrink-0 transition-all";
+                const nameShort = house.nome.replace(" GOIÂNIA", "").replace(" BAR", "").replace(" CLUB", "");
+                btn.innerText = nameShort;
+                filterContainer.appendChild(btn);
+            });
+        }
+
+        function filterPromosByHouse(houseId, btn) {
+            document.querySelectorAll('.promo-filter-tag').forEach(tag => {
+                tag.className = "promo-filter-tag px-3.5 py-1.5 bg-theme-card border border-theme-border text-neutral-400 text-[9px] font-black uppercase tracking-widest rounded-full shrink-0 transition-all";
+            });
+            btn.className = "promo-filter-tag px-3.5 py-1.5 bg-white text-black text-[9px] font-black uppercase tracking-widest rounded-full shrink-0 transition-all border border-transparent";
+            renderGlobalPromos(houseId);
+        }
+
+        function renderGlobalPromos(houseFilter = 'todos') {
             const container = document.getElementById('promos-list-container');
             container.innerHTML = '';
 
+            let hasPromos = false;
+
             housesData.forEach(house => {
+                if (houseFilter !== 'todos' && house.id !== houseFilter) return;
+
                 house.programacao.forEach(p => {
                     p.promocoes.forEach(promo => {
+                        hasPromos = true;
                         const card = document.createElement('div');
-                        card.className = "border border-theme-border bg-theme-card p-4 rounded-[var(--border-radius)] flex justify-between items-center hover:border-neutral-700 transition-colors cursor-pointer group";
+                        card.className = "border p-4 rounded-[var(--border-radius)] flex justify-between items-center hover:brightness-125 transition-all cursor-pointer group shadow-sm";
+                        card.style.borderColor = `${house.theme.primary}25`; // 15% de opacidade da cor da marca
+                        card.style.backgroundColor = house.theme.bgCard;
                         card.onclick = () => openHouseDetail(house.id);
 
                         card.innerHTML = `
-                            <div class="space-y-1.5">
+                            <div class="space-y-2">
                                 <div class="flex items-center space-x-2">
-                                    <span class="text-[8px] font-bold font-heading text-neutral-500 border border-theme-border px-1.5 py-0.5 rounded uppercase tracking-widest">${house.nome}</span>
+                                    <span class="text-[8px] font-black font-heading border px-1.5 py-0.5 rounded uppercase tracking-widest transition-colors" style="border-color: ${house.theme.primary}50; color: ${house.theme.primary}">
+                                        ${house.nome}
+                                    </span>
                                     <span class="text-[9px] text-neutral-400 font-bold tracking-wider font-heading">${p.dia}</span>
                                 </div>
                                 <div class="space-y-0.5">
-                                    <h4 class="text-xs font-bold text-white uppercase tracking-tight font-heading">${promo.nome}</h4>
+                                    <h4 class="text-xs font-bold text-white uppercase tracking-tight font-heading" style="color: ${house.theme.primary}">${promo.nome}</h4>
                                     <p class="text-[11px] text-neutral-400 leading-tight">${promo.descricao}</p>
                                 </div>
                             </div>
-                            <i data-lucide="chevron-right" class="w-4 h-4 text-neutral-600 group-hover:text-neutral-400 transition-colors"></i>
+                            <i data-lucide="chevron-right" class="w-4 h-4 transition-colors" style="color: ${house.theme.primary}"></i>
                         `;
                         container.appendChild(card);
                     });
                 });
             });
+
+            if (!hasPromos) {
+                container.innerHTML = `
+                    <div class="text-center py-8 text-neutral-500 text-xs border border-dashed border-theme-border rounded-[var(--border-radius)] p-4">
+                        Nenhum benefício cadastrado para esta seleção.
+                    </div>
+                `;
+            }
             lucide.createIcons();
         }
 
