@@ -1,18 +1,19 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-BR" class="dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>GynNight - Reservas & Eventos</title>
-    <!-- Google Fonts carregando fontes específicas para cada tipo de casa -->
+    <title>GynNight - Curadoria de Reservas</title>
+    
+    <!-- Google Fonts: Seleção elegante de tipografias -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&family=Orbitron:wght@500;700;900&family=Unbounded:wght@400;600;700;900&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Cinzel:wght@600;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Share+Tech+Mono&display=swap" rel="stylesheet">
     
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     
-    <!-- Lucide Icons para ícones modernos -->
+    <!-- Lucide Icons -->
     <script src="https://unpkg.com/lucide@latest"></script>
     
     <script>
@@ -20,7 +21,7 @@
             theme: {
                 extend: {
                     colors: {
-                        brand: {
+                        theme: {
                             bg: 'var(--bg-app)',
                             card: 'var(--bg-card)',
                             border: 'var(--border-color)',
@@ -39,83 +40,34 @@
     </script>
     
     <style>
-        /* Variáveis de Tema CSS Dinâmicas que mudam dependendo da casa selecionada */
+        /* Variáveis CSS para Temas Minimalistas e Sofisticados */
         :root {
-            /* Tema Padrão: GynNight Premium */
-            --bg-app: #08080c;
-            --bg-card: #12121a;
-            --border-color: #212130;
-            --primary: #a855f7; /* Purple */
-            --primary-glow: rgba(168, 85, 247, 0.4);
-            --secondary: #ec4899; /* Pink */
-            --accent: #06b6d4; /* Cyan */
-            --text-main: #f3f4f6;
-            --text-muted: #9ca3af;
+            /* Vibe Neutra Premium */
+            --bg-app: #0a0a0a;
+            --bg-card: #121212;
+            --border-color: #1a1a1a;
+            --primary: #ffffff;
+            --secondary: #a3a3a3;
+            --accent: #f5f5f5;
             --font-heading: 'Space Grotesk', sans-serif;
             --font-body: 'Plus Jakarta Sans', sans-serif;
-            --border-radius: 1.25rem;
-            --glow-intensity: 0 0 20px;
-            --panel-opacity: 0.7;
+            --border-radius: 0.5rem;
+            --button-radius: 0.375rem;
         }
 
-        /* Estilos Globais e Ajustes de Mobile Simulator */
         body {
             background-color: #030303;
-            color: #f3f4f6;
+            color: #e5e5e5;
             font-family: var(--font-body);
-            overflow-x: hidden;
+            -webkit-tap-highlight-color: transparent;
         }
 
-        /* Simulador de celular centralizado no Desktop */
-        @media (min-width: 640px) {
-            .phone-simulator {
-                width: 412px;
-                height: 860px;
-                border-radius: 40px;
-                box-shadow: 0 0 0 12px #18181b, 0 0 0 13px #27272a, 0 20px 50px rgba(0, 0, 0, 0.8);
-                position: relative;
-                overflow: hidden;
-                border: 2px solid #27272a;
-            }
-            .phone-notch {
-                width: 140px;
-                height: 28px;
-                background-color: #18181b;
-                border-bottom-left-radius: 18px;
-                border-bottom-right-radius: 18px;
-                position: absolute;
-                top: 0;
-                left: 50%;
-                transform: translateX(-50%);
-                z-index: 50;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-            }
-            .phone-notch-camera {
-                width: 10px;
-                height: 10px;
-                background-color: #09090b;
-                border-radius: 50%;
-                margin-left: 10px;
-            }
-            .phone-notch-speaker {
-                width: 40px;
-                height: 4px;
-                background-color: #27272a;
-                border-radius: 2px;
-            }
-            .desktop-background {
-                background-image: radial-gradient(circle at top left, #1a102f, #050508);
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                min-height: 100vh;
-                padding: 20px;
-            }
+        /* Suavização de transições de temas */
+        .theme-transition {
+            transition: background-color 0.4s ease, border-color 0.4s ease, color 0.4s ease, border-radius 0.4s ease;
         }
 
-        /* Removendo barras de rolagem mas mantendo funcionalidade */
+        /* Ocultar barra de rolagem */
         .no-scrollbar::-webkit-scrollbar {
             display: none;
         }
@@ -123,552 +75,410 @@
             -ms-overflow-style: none;
             scrollbar-width: none;
         }
-
-        /* Efeitos de Transição de Vibe/Tema */
-        .theme-transition {
-            transition: background-color 0.5s ease, border-color 0.5s ease, color 0.5s ease, box-shadow 0.5s ease, border-radius 0.5s ease;
-        }
-
-        /* Efeito de neon brilhoso com base na cor primária ativa */
-        .neon-glow {
-            box-shadow: 0 0 15px var(--primary-glow);
-        }
-        .text-neon-glow {
-            text-shadow: 0 0 8px var(--primary-glow);
-        }
-
-        /* Estilos de Botão do Tema */
-        .theme-btn {
-            background-color: var(--primary);
-            border-radius: var(--border-radius);
-            font-family: var(--font-heading);
-            transition: all 0.3s ease;
-        }
-        .theme-btn:hover {
-            box-shadow: 0 0 15px var(--primary);
-            transform: translateY(-1px);
-        }
-
-        /* Estilo de Card de acordo com o tema selecionado */
-        .theme-card {
-            background-color: var(--bg-card);
-            border: 1px solid var(--border-color);
-            border-radius: var(--border-radius);
-            transition: all 0.3s ease;
-        }
-
-        /* Gradientes Decorativos de Fundo */
-        .ambient-glow {
-            position: absolute;
-            width: 150px;
-            height: 150px;
-            border-radius: 50%;
-            background: radial-gradient(circle, var(--primary) 0%, transparent 70%);
-            opacity: 0.15;
-            filter: blur(40px);
-            pointer-events: none;
-            z-index: 0;
-            transition: all 0.8s ease;
-        }
     </style>
 </head>
-<body class="sm:bg-[#030303] bg-brand-bg select-none antialiased theme-transition">
+<body class="theme-transition min-h-screen bg-black">
 
-    <!-- Wrapper para simulação de desktop -->
-    <div class="desktop-background">
+    <!-- Container Principal Centrado: Fica perfeito no Desktop e 100% fluido no Celular -->
+    <div class="max-w-md mx-auto bg-theme-bg min-h-screen flex flex-col theme-transition border-x border-neutral-900 shadow-2xl relative pb-28">
         
-        <!-- Simulador de Celular (no mobile expande para 100% da tela) -->
-        <div class="phone-simulator bg-brand-bg text-gray-100 flex flex-col theme-transition sm:border-0">
-            
-            <!-- Barra Superior do Celular (Notch e Status) - Ocultada em mobile nativo se necessário -->
-            <div class="phone-notch hidden sm:flex">
-                <div class="phone-notch-speaker"></div>
-                <div class="phone-notch-camera"></div>
+        <!-- Header Minimalista -->
+        <header class="px-6 py-5 flex justify-between items-center border-b border-theme-border bg-theme-bg/85 backdrop-blur-md sticky top-0 z-40 theme-transition">
+            <div class="space-y-0.5">
+                <span class="text-[9px] tracking-[0.2em] uppercase font-bold text-neutral-500 font-heading">Curadoria</span>
+                <h1 class="text-sm font-bold tracking-tight font-heading text-theme-primary" id="header-title">GynNight</h1>
             </div>
             
-            <!-- Status Bar Simulada -->
-            <div class="h-10 px-6 pt-3 flex justify-between items-center text-xs font-medium z-40 bg-brand-bg bg-opacity-90 theme-transition relative">
-                <span id="simulator-time">22:00</span>
-                <!-- Seletor Rápido de Tema (Exclusivo do Protótipo para surpreender no pitch) -->
-                <div class="flex items-center space-x-1 bg-white bg-opacity-10 px-2 py-0.5 rounded-full scale-90">
-                    <i data-lucide="palette" class="w-3 h-3 text-[var(--primary)]"></i>
-                    <span class="text-[10px] font-semibold text-white">Vibe-Mode</span>
+            <!-- Toggle de Modo (Cliente vs Gerente) -->
+            <button onclick="toggleManagerMode()" id="manager-toggle-btn" class="flex items-center space-x-1.5 border border-theme-border px-3 py-1.5 rounded-full hover:bg-neutral-900/50 transition-all duration-300">
+                <span class="w-1.5 h-1.5 rounded-full bg-neutral-400" id="role-dot"></span>
+                <span class="text-[9px] uppercase tracking-wider font-semibold font-heading text-neutral-400" id="role-text">Cliente</span>
+            </button>
+        </header>
+
+        <!-- CONTEÚDO PRINCIPAL (Scroll Natural do Navegador - Resolve o bug do celular) -->
+        <main class="flex-1 px-6 py-6 space-y-8 relative">
+            
+            <!-- TAB 1: DESCOBRIR (LISTAGEM DE CASAS) -->
+            <div id="tab-discover-view" class="space-y-8">
+                
+                <!-- Introdução Minimalista -->
+                <div class="space-y-1">
+                    <h2 class="text-xs uppercase tracking-widest font-black text-neutral-400 font-heading">Casas Mapeadas</h2>
+                    <p class="text-xs text-neutral-500">Selecione uma casa para acessar sua programação, promoções e lista.</p>
                 </div>
-                <div class="flex items-center space-x-1.5">
-                    <i data-lucide="signal" class="w-3 h-3"></i>
-                    <i data-lucide="wifi" class="w-3 h-3"></i>
-                    <i data-lucide="battery" class="w-4 h-4"></i>
+
+                <!-- Busca Minimalista -->
+                <div class="relative">
+                    <input type="text" id="search-input" onkeyup="searchFilter()" placeholder="Buscar por nome ou estilo..." class="w-full bg-theme-card/50 border border-theme-border rounded-[var(--border-radius)] py-2.5 pl-9 pr-4 text-xs focus:outline-none focus:border-neutral-500 text-white transition-all">
+                    <i data-lucide="search" class="absolute left-3.5 top-3 w-3.5 h-3.5 text-neutral-500"></i>
+                </div>
+
+                <!-- Lista de Casas Noturnas -->
+                <div class="space-y-4" id="houses-list-container">
+                    <!-- Gerado dinamicamente via JS -->
                 </div>
             </div>
 
-            <!-- Header do App (Controle de Perfis / Modo Gerente) -->
-            <header class="px-5 py-3 flex justify-between items-center border-b border-brand-border bg-brand-bg bg-opacity-90 backdrop-blur-md z-30 theme-transition relative">
-                <div class="flex items-center space-x-2">
-                    <div class="w-8 h-8 rounded-full bg-gradient-to-tr from-[var(--primary)] to-[var(--secondary)] flex items-center justify-center font-bold text-sm text-white shadow-md">
-                        GN
-                    </div>
-                    <div>
-                        <h1 class="text-xs text-gray-400">Goiânia Nightlife</h1>
-                        <p class="text-sm font-bold tracking-tight font-heading text-[var(--primary)]" id="current-vibe-title">GynNight Pro</p>
-                    </div>
-                </div>
-                
-                <!-- Toggle de Modo (Cliente vs Gerente) -->
-                <button onclick="toggleManagerMode()" id="manager-toggle-btn" class="flex items-center space-x-1 bg-white bg-opacity-5 hover:bg-opacity-10 border border-brand-border px-2.5 py-1 rounded-full transition-all duration-300">
-                    <i data-lucide="user" class="w-3.5 h-3.5 text-[var(--primary)]" id="role-icon"></i>
-                    <span class="text-[10px] font-bold uppercase tracking-wider" id="role-text">Modo Cliente</span>
-                </button>
-            </header>
-
-            <!-- CONTEÚDO PRINCIPAL (Scrollable) -->
-            <main class="flex-1 overflow-y-auto no-scrollbar relative z-10 px-4 py-4 pb-24 bg-brand-bg theme-transition">
-                
-                <!-- Luzes ambientes interativas de fundo -->
-                <div class="ambient-glow -top-10 -left-10" id="glow-1"></div>
-                <div class="ambient-glow top-1/2 -right-10" id="glow-2"></div>
-                
-                <!-- TAB 1: DESCOBRIR (LISTAGEM DE CASAS) -->
-                <div id="tab-discover-view" class="space-y-6">
-                    
-                    <!-- Banner de Boas Vindas -->
-                    <div class="relative rounded-[var(--border-radius)] overflow-hidden h-40 flex flex-col justify-end p-4 border border-brand-border group shadow-lg">
-                        <div class="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110" style="background-image: url('https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?q=80&w=600&auto=format&fit=crop');"></div>
-                        <div class="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent"></div>
-                        <div class="relative z-10 space-y-1">
-                            <span class="bg-red-500 text-white font-extrabold text-[9px] uppercase px-2 py-0.5 rounded-full font-heading tracking-widest inline-block animate-pulse">Hoje à Noite</span>
-                            <h2 class="text-xl font-black font-heading tracking-tight leading-none text-white">QUAL É A SUA VIBE HOJE?</h2>
-                            <p class="text-xs text-gray-300">Selecione uma casa e veja o app se transformar com a identidade dela.</p>
-                        </div>
-                    </div>
-
-                    <!-- Busca e Filtros Rápidos -->
-                    <div class="space-y-3">
-                        <div class="relative">
-                            <input type="text" id="search-input" placeholder="Buscar balada, gênero ou setor..." class="w-full bg-brand-card border border-brand-border rounded-[var(--border-radius)] py-2.5 pl-10 pr-4 text-xs focus:outline-none focus:border-[var(--primary)] text-white transition-all">
-                            <i data-lucide="search" class="absolute left-3.5 top-3 w-4 h-4 text-gray-400"></i>
-                        </div>
-                        
-                        <!-- Tags de Setor e Estilo -->
-                        <div class="flex space-x-2 overflow-x-auto no-scrollbar pb-1">
-                            <button onclick="filterHouses('todos')" class="filter-tag px-3 py-1 bg-[var(--primary)] text-white text-xs font-semibold rounded-full shrink-0 transition-all border border-transparent">Todos</button>
-                            <button onclick="filterHouses('Setor Bueno')" class="filter-tag px-3 py-1 bg-brand-card border border-brand-border text-gray-300 text-xs font-medium rounded-full shrink-0 transition-all">Bueno</button>
-                            <button onclick="filterHouses('Setor Sul')" class="filter-tag px-3 py-1 bg-brand-card border border-brand-border text-gray-300 text-xs font-medium rounded-full shrink-0 transition-all">Setor Sul</button>
-                            <button onclick="filterHouses('Techno')" class="filter-tag px-3 py-1 bg-brand-card border border-brand-border text-gray-300 text-xs font-medium rounded-full shrink-0 transition-all">Techno</button>
-                            <button onclick="filterHouses('Funk')" class="filter-tag px-3 py-1 bg-brand-card border border-brand-border text-gray-300 text-xs font-medium rounded-full shrink-0 transition-all">Funk</button>
-                            <button onclick="filterHouses('Pagode')" class="filter-tag px-3 py-1 bg-brand-card border border-brand-border text-gray-300 text-xs font-medium rounded-full shrink-0 transition-all">Pagode</button>
-                            <button onclick="filterHouses('Pop')" class="filter-tag px-3 py-1 bg-brand-card border border-brand-border text-gray-300 text-xs font-medium rounded-full shrink-0 transition-all">Pop</button>
-                        </div>
-                    </div>
-
-                    <!-- Lista de Casas Noturnas Mapeadas -->
-                    <div class="space-y-4" id="houses-list-container">
-                        <!-- Será preenchido dinamicamente via JS com design correspondente -->
-                    </div>
-
+            <!-- TAB 2: PROMOÇÕES (GLOBAL) -->
+            <div id="tab-promos-view" class="space-y-6 hidden">
+                <div class="space-y-1">
+                    <h2 class="text-xs uppercase tracking-widest font-black text-neutral-400 font-heading">Promoções do Dia</h2>
+                    <p class="text-xs text-neutral-500">Benefícios ativos nas casas para a noite de hoje.</p>
                 </div>
 
-                <!-- TAB 2: PROMOÇÕES (GLOBAL) -->
-                <div id="tab-promos-view" class="space-y-5 hidden">
+                <div class="space-y-4" id="promos-list-container">
+                    <!-- Gerado dinamicamente -->
+                </div>
+            </div>
+
+            <!-- TAB 3: RESERVAS (INGRESSOS) -->
+            <div id="tab-reservas-view" class="space-y-6 hidden">
+                <div class="flex justify-between items-center">
                     <div class="space-y-1">
-                        <h2 class="text-lg font-black font-heading tracking-tight text-[var(--primary)] text-neon-glow">PROMOÇÕES ATIVAS</h2>
-                        <p class="text-xs text-gray-400">Ofertas imperdíveis, dobradinhas e combos rolando hoje.</p>
+                        <h2 class="text-xs uppercase tracking-widest font-black text-neutral-400 font-heading">Minhas Reservas</h2>
+                        <p class="text-xs text-neutral-500">Apresente o QR Code na portaria da casa.</p>
                     </div>
-
-                    <div class="space-y-4" id="promos-list-container">
-                        <!-- Será preenchido dinamicamente com todas as promos das casas -->
-                    </div>
+                    <span class="text-[10px] font-bold font-heading text-neutral-400 uppercase tracking-widest border border-theme-border px-2 py-1 rounded" id="reserva-count">
+                        0 Ativas
+                    </span>
                 </div>
 
-                <!-- TAB 3: MINHAS RESERVAS -->
-                <div id="tab-reservas-view" class="space-y-5 hidden">
-                    <div class="flex justify-between items-center">
-                        <div class="space-y-1">
-                            <h2 class="text-lg font-black font-heading tracking-tight text-[var(--primary)] text-neon-glow">MINHAS RESERVAS</h2>
-                            <p class="text-xs text-gray-400">Seu passaporte de entrada para a curtição.</p>
-                        </div>
-                        <span class="bg-brand-card border border-brand-border px-2 py-1 rounded-full text-[10px] font-bold text-gray-300 flex items-center space-x-1">
-                            <i data-lucide="ticket" class="w-3 h-3 text-[var(--secondary)]"></i>
-                            <span id="reserva-count">0 Ativas</span>
-                        </span>
-                    </div>
-
-                    <div id="reservas-empty-state" class="theme-card p-8 text-center space-y-4 flex flex-col items-center justify-center min-h-[300px]">
-                        <div class="w-16 h-16 rounded-full bg-white bg-opacity-5 flex items-center justify-center border border-brand-border">
-                            <i data-lucide="calendar-x" class="w-8 h-8 text-gray-500"></i>
-                        </div>
-                        <div class="space-y-1">
-                            <h3 class="font-bold text-sm text-gray-200">Nenhuma reserva ativa</h3>
-                            <p class="text-xs text-gray-400 max-w-xs mx-auto">Você ainda não garantiu seu nome na lista de nenhuma casa para esta semana.</p>
-                        </div>
-                        <button onclick="switchTab('discover')" class="theme-btn px-5 py-2 text-xs font-bold text-white shadow-lg flex items-center space-x-1">
-                            <i data-lucide="sparkles" class="w-3.5 h-3.5"></i>
-                            <span>Descobrir Baladas</span>
-                        </button>
-                    </div>
-
-                    <div class="space-y-4 hidden" id="reservas-list-container">
-                        <!-- Reservas adicionadas pelo usuário aparecem aqui dinamicamente -->
-                    </div>
-                </div>
-
-                <!-- TELA DE DETALHE DA CASA (VISÃO INTERNA EXCLUSIVA) -->
-                <div id="house-detail-view" class="space-y-6 hidden">
-                    <!-- Gerado dinamicamente no clique, trazendo os detalhes, programação, djs e estilo da casa -->
-                </div>
-
-                <!-- TELA DE MODO GERENTE (DASHBOARD COMPLETO) -->
-                <div id="manager-dashboard-view" class="space-y-6 hidden">
-                    <!-- Será gerado dinamicamente para que o usuário possa fazer check-in dos clientes -->
-                </div>
-
-            </main>
-
-            <!-- BARRA DE NAVEGAÇÃO INFERIOR (Bottom Nav) -->
-            <nav class="absolute bottom-0 left-0 right-0 h-16 border-t border-brand-border bg-brand-bg bg-opacity-95 backdrop-blur-md flex justify-around items-center px-4 z-40 theme-transition">
-                <button onclick="switchTab('discover')" id="nav-discover" class="nav-btn flex flex-col items-center justify-center space-y-1 text-[var(--primary)] transition-all">
-                    <i data-lucide="compass" class="w-5 h-5"></i>
-                    <span class="text-[10px] font-bold">Descobrir</span>
-                </button>
-                <button onclick="switchTab('promos')" id="nav-promos" class="nav-btn flex flex-col items-center justify-center space-y-1 text-gray-400 hover:text-gray-200 transition-all">
-                    <i data-lucide="flame" class="w-5 h-5"></i>
-                    <span class="text-[10px] font-bold">Promoções</span>
-                </button>
-                <button onclick="switchTab('reservas')" id="nav-reservas" class="nav-btn flex flex-col items-center justify-center space-y-1 text-gray-400 hover:text-gray-200 transition-all relative">
-                    <i data-lucide="ticket" class="w-5 h-5"></i>
-                    <span class="text-[10px] font-bold">Reservas</span>
-                    <!-- Badge indicador de reservas -->
-                    <span id="reservas-badge" class="absolute -top-1 right-2 w-4 h-4 bg-red-500 text-white rounded-full text-[9px] font-extrabold flex items-center justify-center hidden">0</span>
-                </button>
-            </nav>
-
-            <!-- MODAL DE RESERVA INTERATIVA -->
-            <div id="reservation-modal" class="fixed inset-0 z-50 flex items-end sm:items-center justify-center p-0 sm:p-4 bg-black bg-opacity-80 backdrop-blur-sm hidden transition-all duration-300">
-                <div class="bg-brand-bg border-t sm:border border-brand-border w-full sm:max-w-md rounded-t-[20px] sm:rounded-[var(--border-radius)] p-6 space-y-5 shadow-2xl relative theme-transition max-h-[90vh] overflow-y-auto no-scrollbar">
-                    <button onclick="closeReservationModal()" class="absolute top-4 right-4 w-8 h-8 rounded-full bg-white bg-opacity-5 flex items-center justify-center border border-brand-border hover:bg-opacity-10">
-                        <i data-lucide="x" class="w-4 h-4 text-gray-400"></i>
+                <!-- Estado Vazio -->
+                <div id="reservas-empty-state" class="border border-dashed border-theme-border p-8 text-center rounded-[var(--border-radius)] space-y-4 py-12">
+                    <p class="text-xs text-neutral-500">Nenhuma reserva ativa no momento.</p>
+                    <button onclick="switchTab('discover')" class="border border-neutral-700 hover:border-neutral-500 text-[10px] font-bold uppercase tracking-wider px-4 py-2 rounded-[var(--button-radius)] transition-all">
+                        Explorar Casas
                     </button>
-                    
-                    <div class="space-y-1">
-                        <h3 class="text-lg font-black font-heading text-white tracking-tight" id="modal-event-title">Confirmar Presença</h3>
-                        <p class="text-xs text-gray-400" id="modal-house-title">Môi Goiânia</p>
-                    </div>
+                </div>
 
-                    <form id="reservation-form" onsubmit="handleReservationSubmit(event)" class="space-y-4">
-                        <input type="hidden" id="modal-event-id">
-                        <input type="hidden" id="modal-house-id">
-                        
-                        <div class="space-y-1.5">
-                            <label class="text-[11px] font-bold uppercase tracking-wider text-gray-400">Nome Completo</label>
-                            <input type="text" id="res-name" required placeholder="Digite seu nome para a lista" class="w-full bg-brand-card border border-brand-border rounded-[var(--border-radius)] px-3 py-2.5 text-xs text-white focus:outline-none focus:border-[var(--primary)]">
-                        </div>
-
-                        <div class="grid grid-cols-2 gap-3">
-                            <div class="space-y-1.5">
-                                <label class="text-[11px] font-bold uppercase tracking-wider text-gray-400">Telefone / WhatsApp</label>
-                                <input type="tel" id="res-phone" required placeholder="(62) 99999-9999" class="w-full bg-brand-card border border-brand-border rounded-[var(--border-radius)] px-3 py-2.5 text-xs text-white focus:outline-none focus:border-[var(--primary)]">
-                            </div>
-                            <div class="space-y-1.5">
-                                <label class="text-[11px] font-bold uppercase tracking-wider text-gray-400">Acompanhantes</label>
-                                <select id="res-guests" class="w-full bg-brand-card border border-brand-border rounded-[var(--border-radius)] px-3 py-2.5 text-xs text-white focus:outline-none focus:border-[var(--primary)]">
-                                    <option value="1">Apenas eu (1)</option>
-                                    <option value="2">Eu + 1 amigo (2)</option>
-                                    <option value="3">Eu + 2 amigos (3)</option>
-                                    <option value="4">Eu + 3 amigos (4)</option>
-                                    <option value="5">Eu + 4 amigos (5)</option>
-                                </select>
-                            </div>
-                        </div>
-
-                        <!-- Info extra do evento dependendo do tipo -->
-                        <div class="p-3 bg-white bg-opacity-5 rounded-[var(--border-radius)] border border-brand-border flex items-start space-x-2.5">
-                            <i data-lucide="info" class="w-4 h-4 text-[var(--accent)] shrink-0 mt-0.5"></i>
-                            <div class="text-[10px] text-gray-400 leading-relaxed">
-                                <p class="font-semibold text-gray-300">Entrada e Regras da Lista:</p>
-                                <p id="modal-event-rules">Sujeito a lotação da casa. Chegue cedo para garantir seu benefício de entrada FREE!</p>
-                            </div>
-                        </div>
-
-                        <button type="submit" class="w-full theme-btn py-3 text-xs font-black uppercase tracking-wider text-white flex items-center justify-center space-x-2 shadow-lg">
-                            <i data-lucide="check" class="w-4 h-4"></i>
-                            <span>Garantir Nome na Lista</span>
-                        </button>
-                    </form>
+                <div class="space-y-6 hidden" id="reservas-list-container">
+                    <!-- Gerado dinamicamente -->
                 </div>
             </div>
 
-            <!-- TOAST DE SUCESSO (CONFETTI SIMULADO) -->
-            <div id="toast-success" class="fixed top-12 left-1/2 -translate-x-1/2 z-50 bg-green-500 text-white font-bold text-xs px-4 py-3 rounded-full shadow-2xl flex items-center space-x-2 hidden animate-bounce">
-                <i data-lucide="party-popper" class="w-4 h-4"></i>
-                <span id="toast-message">Reserva confirmada com sucesso!</span>
+            <!-- TELA INTERNA: DETALHE DA CASA -->
+            <div id="house-detail-view" class="space-y-8 hidden">
+                <!-- Gerado dinamicamente -->
             </div>
 
+            <!-- TELA INTERNA: DASHBOARD GERENTE -->
+            <div id="manager-dashboard-view" class="space-y-6 hidden">
+                <!-- Gerado dinamicamente -->
+            </div>
+
+        </main>
+
+        <!-- BARRA DE NAVEGAÇÃO INFERIOR (Pulsada ao fundo - Correção de CSS do iOS/Android) -->
+        <nav class="fixed bottom-0 left-0 right-0 max-w-md mx-auto h-16 border-t border-theme-border bg-theme-bg/95 backdrop-blur-md flex justify-around items-center px-6 z-50 theme-transition">
+            <button onclick="switchTab('discover')" id="nav-discover" class="nav-btn flex flex-col items-center justify-center space-y-1 text-white transition-all">
+                <i data-lucide="compass" class="w-4 h-4"></i>
+                <span class="text-[9px] uppercase font-bold tracking-widest font-heading">Casas</span>
+            </button>
+            <button onclick="switchTab('promos')" id="nav-promos" class="nav-btn flex flex-col items-center justify-center space-y-1 text-neutral-500 hover:text-neutral-300 transition-all">
+                <i data-lucide="flame" class="w-4 h-4"></i>
+                <span class="text-[9px] uppercase font-bold tracking-widest font-heading">Benefícios</span>
+            </button>
+            <button onclick="switchTab('reservas')" id="nav-reservas" class="nav-btn flex flex-col items-center justify-center space-y-1 text-neutral-500 hover:text-neutral-300 transition-all relative">
+                <i data-lucide="ticket" class="w-4 h-4"></i>
+                <span class="text-[9px] uppercase font-bold tracking-widest font-heading">Listas</span>
+                <span id="reservas-badge" class="absolute -top-1.5 right-1 w-2 h-2 bg-neutral-400 rounded-full hidden"></span>
+            </button>
+        </nav>
+
+        <!-- MODAL DE RESERVA (DESLIZA DE BAIXO NO MOBILE) -->
+        <div id="reservation-modal" class="fixed inset-0 z-50 flex items-end justify-center bg-black/80 backdrop-blur-sm hidden transition-all duration-300">
+            <div class="bg-theme-bg border-t border-theme-border w-full max-w-md rounded-t-xl p-6 space-y-6 shadow-2xl relative theme-transition max-h-[90vh] overflow-y-auto no-scrollbar pb-10">
+                <button onclick="closeReservationModal()" class="absolute top-5 right-5 w-7 h-7 rounded-full bg-neutral-900 border border-theme-border flex items-center justify-center">
+                    <i data-lucide="x" class="w-3.5 h-3.5 text-neutral-400"></i>
+                </button>
+                
+                <div class="space-y-1.5">
+                    <span class="text-[9px] tracking-widest uppercase font-bold text-neutral-500 font-heading" id="modal-house-title">Môi Goiânia</span>
+                    <h3 class="text-sm font-black font-heading text-white uppercase tracking-tight" id="modal-event-title">Nome na Lista</h3>
+                </div>
+
+                <form id="reservation-form" onsubmit="handleReservationSubmit(event)" class="space-y-4">
+                    <input type="hidden" id="modal-event-id">
+                    <input type="hidden" id="modal-house-id">
+                    
+                    <div class="space-y-1">
+                        <label class="text-[9px] font-bold uppercase tracking-widest text-neutral-400 font-heading">Seu Nome Completo</label>
+                        <input type="text" id="res-name" required placeholder="Digite para a portaria" class="w-full bg-theme-card border border-theme-border rounded-[var(--border-radius)] px-3 py-2.5 text-xs text-white focus:outline-none focus:border-neutral-500">
+                    </div>
+
+                    <div class="grid grid-cols-2 gap-3">
+                        <div class="space-y-1">
+                            <label class="text-[9px] font-bold uppercase tracking-widest text-neutral-400 font-heading">WhatsApp</label>
+                            <input type="tel" id="res-phone" required placeholder="(62) 99999-9999" class="w-full bg-theme-card border border-theme-border rounded-[var(--border-radius)] px-3 py-2.5 text-xs text-white focus:outline-none focus:border-neutral-500">
+                        </div>
+                        <div class="space-y-1">
+                            <label class="text-[9px] font-bold uppercase tracking-widest text-neutral-400 font-heading">Quantidade</label>
+                            <select id="res-guests" class="w-full bg-theme-card border border-theme-border rounded-[var(--border-radius)] px-3 py-2.5 text-xs text-white focus:outline-none focus:border-neutral-500">
+                                <option value="1">1 Pessoa</option>
+                                <option value="2">2 Pessoas</option>
+                                <option value="3">3 Pessoas</option>
+                                <option value="4">4 Pessoas</option>
+                                <option value="5">5 Pessoas</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="p-3.5 bg-neutral-900/40 rounded-[var(--border-radius)] border border-theme-border text-[10px] text-neutral-400 leading-relaxed" id="modal-event-rules">
+                        Sujeito às regras normais da casa na portaria.
+                    </div>
+
+                    <button type="submit" class="w-full bg-theme-primary text-black hover:bg-neutral-200 transition-all py-3 rounded-[var(--button-radius)] text-xs font-bold uppercase tracking-widest font-heading">
+                        Confirmar Entrada na Lista
+                    </button>
+                </form>
+            </div>
         </div>
+
+        <!-- NOTIFICAÇÃO TOAST SIMPLES -->
+        <div id="toast-success" class="fixed top-6 left-1/2 -translate-x-1/2 z-50 bg-white text-black font-semibold text-[10px] uppercase tracking-widest px-4 py-2.5 rounded-full shadow-2xl flex items-center space-x-2 hidden">
+            <i data-lucide="check" class="w-3.5 h-3.5"></i>
+            <span id="toast-message">Confirmado</span>
+        </div>
+
     </div>
 
-    <!-- JAVASCRIPT: MOTOR INTERATIVO E TROCA DE TEMAS -->
+    <!-- JAVASCRIPT: MOTOR E MODELO DE DADOS -->
     <script>
-        // Simulador de Hora Atual do Dispositivo
-        function updateTime() {
-            const now = new Date();
-            const hours = String(now.getHours()).padStart(2, '0');
-            const minutes = String(now.getMinutes()).padStart(2, '0');
-            document.getElementById('simulator-time').textContent = `${hours}:${minutes}`;
-        }
-        setInterval(updateTime, 1000);
-        updateTime();
-
-        // --- DATABASE DE CASAS COM TEMAS EXCLUSIVOS ---
+        // --- BASE DE DADOS DAS CASAS COM DIREÇÃO ARTÍSTICA MINIMALISTA ---
         const housesData = [
             {
                 id: "subcult",
-                nome: "Subcult 3.0",
+                nome: "SUBCULT",
                 especialidade: "Techno, Hard Techno, Industrial",
-                setor: "Ocupação Fábrica - Cervejaria Astúria",
+                setor: "Cervejaria Astúria",
                 instagram: "@subcult.go",
-                imagemCapa: "https://images.unsplash.com/photo-1574391884720-bbc3740c59d1?q=80&w=600&auto=format&fit=crop",
-                logoGradient: "from-red-600 to-black",
                 theme: {
-                    bgApp: "#050505",
-                    bgCard: "#0f0f12",
-                    borderColor: "#26262b",
-                    primary: "#ff003c", // Stark warning crimson
-                    primaryGlow: "rgba(255, 0, 60, 0.4)",
-                    secondary: "#00ff66", // Toxic green
-                    accent: "#ffffff", // Pure white
-                    fontHeading: "'Unbounded', sans-serif",
+                    bgApp: "#000000",
+                    bgCard: "#070707",
+                    borderColor: "#1c1c1c",
+                    primary: "#ffffff",
+                    secondary: "#888888",
+                    accent: "#ff002b", // Apenas detalhe minimalista
+                    fontHeading: "'Share Tech Mono', monospace",
                     fontBody: "'Space Grotesk', sans-serif",
-                    borderRadius: "0px", // Industrial block aesthetic
-                    cardStyle: "industrial",
-                    title: "VIBE TECHNO INDUSTRIAL"
+                    borderRadius: "0px",
+                    buttonRadius: "0px",
+                    title: "Subcult Industrial"
                 },
                 programacao: [
                     {
                         id: "subcult-main",
-                        dia: "SÁBADO",
-                        nome: "SUBCULT 3.0 - Ocupação Fábrica",
+                        dia: "SÁBADO / 27.SET",
+                        nome: "SUBCULT 3.0",
                         horario: "22h às 06h",
-                        djs: "Molothav (SP), Alex Justino, Kobot, Roan, Cadelacéu, Scar B2B Mari Ventura, DJ Poisnão, Morrice, Dakini",
-                        descricao: "Uma imersão completa no techno e hard techno dentro de uma estrutura industrial real. Arte visual, som pesado e arquitetura bruta.",
-                        entradaFree: "ENTRADA FREE até 23h via Lista do App",
+                        djs: "MOLOTHAV, ALEX JUSTINO, KOBOT, ROAN, CADELACÉU, SCAR B2B MARI VENTURA, POISNÃO, MORRICE, DAKINI",
+                        descricao: "Ocupação industrial voltada ao techno nacional e local. Cenografia bruta e sound system de alta pressão.",
+                        entradaFree: "LOTE PROMOCIONAL DISPONÍVEL NO APP",
                         promocoes: [
-                            { nome: "Dobradinha Gin & Tônica", descricao: "Até 23h59", tipo: "dobradinha" },
-                            { nome: "Lote Promocional Especial", descricao: "Virada automática de lote às 23:59", tipo: "lote" }
+                            { nome: "Entrada Free", descricao: "Até às 23h na lista do app", tipo: "free" },
+                            { nome: "Dobradinha Gin & Tônica", descricao: "Válida até 23h59", tipo: "promo" }
                         ]
                     }
                 ]
             },
             {
                 id: "moi",
-                nome: "Môi Goiânia",
+                nome: "MÔI GOIÂNIA",
                 especialidade: "Funk, Eletrônico, Hits",
                 setor: "Setor Bueno",
                 instagram: "@moigoiania",
-                imagemCapa: "https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?q=80&w=600&auto=format&fit=crop",
-                logoGradient: "from-cyan-500 to-emerald-500",
                 theme: {
-                    bgApp: "#090e1a",
-                    bgCard: "#131b2e",
-                    borderColor: "#1e293b",
-                    primary: "#06b6d4", // Electric cyan
-                    primaryGlow: "rgba(6, 182, 212, 0.4)",
-                    secondary: "#10b981", // Emerald
-                    accent: "#facc15", // Yellow
-                    fontHeading: "'Plus Jakarta Sans', sans-serif",
+                    bgApp: "#080a10",
+                    bgCard: "#10131d",
+                    borderColor: "#1c2130",
+                    primary: "#38bdf8", // Sky Blue
+                    secondary: "#94a3b8",
+                    accent: "#34d399",
+                    fontHeading: "'Space Grotesk', sans-serif",
                     fontBody: "'Plus Jakarta Sans', sans-serif",
-                    borderRadius: "1.25rem", // Sleek modern rounded
-                    cardStyle: "glass",
-                    title: "MÔI CREW VIBE"
+                    borderRadius: "1rem",
+                    buttonRadius: "0.5rem",
+                    title: "Môi Bueno"
                 },
                 programacao: [
                     {
                         id: "moi-quarta",
                         dia: "QUARTA",
-                        nome: "DáoPlay! (Môi)",
+                        nome: "DÁOPLAY!",
                         horario: "18h às 01h",
                         djs: "Môi Residentes",
-                        descricao: "Você no comando do som! O melhor da interatividade e resenha de Goiânia.",
-                        entradaFree: "ENTRADA FREE a noite toda (sujeito a lotação)",
+                        descricao: "Você no comando da pista de Goiânia.",
+                        entradaFree: "ENTRADA FREE (sujeito a lotação)",
                         promocoes: [
-                            { nome: "Dobradinha Caipirinha R$30", descricao: "Válido até 21h", tipo: "dobradinha" },
-                            { nome: "Sandubas 20% OFF", descricao: "Válido até 21h", tipo: "desconto" }
+                            { nome: "Dobradinha Caipirinha R$30", descricao: "Até às 21h", tipo: "promo" },
+                            { nome: "Sandubas 20% OFF", descricao: "Até às 21h", tipo: "promo" }
                         ]
                     },
                     {
                         id: "moi-quinta",
                         dia: "QUINTA",
-                        nome: "Girls & Wine",
+                        nome: "GIRLS & WINE",
                         horario: "19h às 02h",
-                        djs: "DJs Convidados",
-                        descricao: "A noite mais charmosa da semana com excelente música e resenha qualificada.",
-                        entradaFree: "ENTRADA FREE (sujeito a alteração)",
+                        djs: "Lineup Girls & Beats",
+                        descricao: "Encontro semanal refinado.",
+                        entradaFree: "ENTRADA FREE",
                         promocoes: [
-                            { nome: "Vinho: 2 taças por R$30", descricao: "Válido até 22h exclusivo para mulheres", tipo: "combo" }
+                            { nome: "Vinho: 2 taças por R$30", descricao: "Até 22h para mulheres", tipo: "promo" }
                         ]
                     },
                     {
                         id: "moi-sexta",
                         dia: "SEXTA",
-                        nome: "Chá de Rolezeiro",
+                        nome: "CHÁ DE ROLEZEIRO",
                         horario: "19h às 03h",
-                        djs: "Lineup Especial Funk",
-                        descricao: "O verdadeiro Baile de Goiânia começa aqui. Prepare o copo e a dancinha.",
-                        entradaFree: "ENTRADA FREE até 20h | Após R$10",
+                        djs: "DJs Funk & Baile",
+                        descricao: "O verdadeiro pancadão do Bueno.",
+                        entradaFree: "FREE até 20h | Após R$10",
                         promocoes: [
-                            { nome: "Chá de Rolezeiro 2 por R$40", descricao: "Válido até 21h", tipo: "combo" }
+                            { nome: "Chá de Rolezeiro 2 por R$40", descricao: "Até às 21h", tipo: "promo" }
                         ]
                     }
                 ]
             },
             {
                 id: "cajuina",
-                nome: "Cajuína",
+                nome: "CAJUÍNA",
                 especialidade: "Pagode, Forró, Sertanejo",
                 setor: "Setor Sul",
                 instagram: "@cajuina.goiania",
-                imagemCapa: "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?q=80&w=600&auto=format&fit=crop",
-                logoGradient: "from-amber-500 to-orange-700",
                 theme: {
-                    bgApp: "#120d0a", // Warm rich dark cocoa
-                    bgCard: "#1c1511",
-                    borderColor: "#2d211a",
-                    primary: "#f97316", // Sunset orange
-                    primaryGlow: "rgba(249, 115, 22, 0.4)",
-                    secondary: "#10b981", // Tropical green
-                    accent: "#eab308", // Golden strings
+                    bgApp: "#0e0d0b",
+                    bgCard: "#171512",
+                    borderColor: "#26231d",
+                    primary: "#f97316", // Warm Orange
+                    secondary: "#a8a29e",
+                    accent: "#eab308",
                     fontHeading: "'Playfair Display', serif",
                     fontBody: "'Plus Jakarta Sans', sans-serif",
-                    borderRadius: "0.75rem", // Soft organic
-                    cardStyle: "organic",
-                    title: "COZY BRASILIDADE VIBE"
+                    borderRadius: "0.375rem",
+                    buttonRadius: "0.25rem",
+                    title: "Cajuína Brasil"
                 },
                 programacao: [
                     {
                         id: "caju-sexta",
                         dia: "SEXTA",
-                        nome: "Pagodão do Caju",
+                        nome: "PAGODÃO DO CAJU",
                         horario: "18h às 02h",
                         djs: "Banda do Caju & Convidados",
-                        descricao: "Muito samba, cerveja trincando e aquela energia boa de quintal de casa.",
-                        entradaFree: "Entrada R$15 o dia todo",
+                        descricao: "Samba raiz e cerveja gelada no quintal.",
+                        entradaFree: "Entrada R$15",
                         promocoes: [
-                            { nome: "Dobradinha de Chopp Trincando", descricao: "Até as 21h", tipo: "dobradinha" },
-                            { nome: "Combo Cajuína Especial 15% OFF", descricao: "Porção de pasteis + Chopp", tipo: "combo" }
+                            { nome: "Dobradinha de Chopp", descricao: "Até às 21h", tipo: "promo" },
+                            { nome: "Combo Cajuína 15% OFF", descricao: "Porção de pasteis com chopp", tipo: "promo" }
                         ]
                     }
                 ]
             },
             {
                 id: "mosaic",
-                nome: "Mosaic",
+                nome: "MOSAIC",
                 especialidade: "Pop, Eletropop, Hyperpop",
-                setor: "Setor Bueno",
+                setor: "Setor Marista",
                 instagram: "@mosaic.goiania",
-                imagemCapa: "https://images.unsplash.com/photo-1470225620780-dba8ba36b745?q=80&w=600&auto=format&fit=crop",
-                logoGradient: "from-pink-500 to-indigo-500",
                 theme: {
-                    bgApp: "#0d0214", // Velvet space orchid
-                    bgCard: "#190529",
-                    borderColor: "#2f0e47",
-                    primary: "#ec4899", // Neon pink
-                    primaryGlow: "rgba(236, 72, 153, 0.4)",
-                    secondary: "#00f0ff", // Cyber cyan
-                    accent: "#a855f7", // Hyperpop purple
+                    bgApp: "#0a060d",
+                    bgCard: "#130f18",
+                    borderColor: "#221a28",
+                    primary: "#f472b6", // Pastel Pink
+                    secondary: "#94a3b8",
+                    accent: "#22d3ee",
                     fontHeading: "'Space Grotesk', sans-serif",
                     fontBody: "'Space Grotesk', sans-serif",
-                    borderRadius: "1.5rem", // Round hyperpop bubble style
-                    cardStyle: "glitch-cyber",
-                    title: "HYPERPOP & CYBER GLOW"
+                    borderRadius: "0.75rem",
+                    buttonRadius: "0.375rem",
+                    title: "Mosaic Pop"
                 },
                 programacao: [
                     {
                         id: "mosaic-sabado",
                         dia: "SÁBADO",
-                        nome: "HyperPop Neon Fest",
+                        nome: "HYPERPOP NIGHT",
                         horario: "22h às 05h",
-                        djs: "DJs Residentes Mosaic + Performance Drag",
-                        descricao: "Liberte sua criatividade! Luzes UV, maquiagem neon grátis na entrada e os hits do pop global.",
-                        entradaFree: "ENTRADA FREE até 23h com nome no App",
+                        djs: "DJs Residentes Mosaic",
+                        descricao: "Cultura pop, hyperpop e performances exclusivas.",
+                        entradaFree: "FREE até 23h com nome na lista",
                         promocoes: [
-                            { nome: "Dobradinha Vodka com Energético", descricao: "Até 00h", tipo: "dobradinha" },
-                            { nome: "Shot de Neon na entrada", descricao: "Grátis para os 100 primeiros", tipo: "freebie" }
+                            { nome: "Dobradinha Vodka com Energético", descricao: "Até 00h", tipo: "promo" }
                         ]
                     }
                 ]
             },
             {
                 id: "vernissage",
-                nome: "Vernissage Club",
+                nome: "VERNISSAGE CLUB",
                 especialidade: "Funk, Latin, Temático",
                 setor: "Setor Oeste",
                 instagram: "@vernissageclub",
-                imagemCapa: "https://images.unsplash.com/photo-1533174072545-7a4b6ad7a6c3?q=80&w=600&auto=format&fit=crop",
-                logoGradient: "from-rose-500 to-yellow-600",
                 theme: {
-                    bgApp: "#1a0309", // Velvet red wine
-                    bgCard: "#260610",
-                    borderColor: "#3f0d1b",
-                    primary: "#fb7185", // Soft rose
-                    primaryGlow: "rgba(251, 113, 133, 0.4)",
-                    secondary: "#d4af37", // Imperial Gold
-                    accent: "#e11d48", // Scarlet red
-                    fontHeading: "'Cinzel', serif",
+                    bgApp: "#0f0507",
+                    bgCard: "#1a0c0e",
+                    borderColor: "#2b171a",
+                    primary: "#fda4af", // Soft Rose
+                    secondary: "#a1a1aa",
+                    accent: "#e11d48",
+                    fontHeading: "'Playfair Display', serif",
                     fontBody: "'Plus Jakarta Sans', sans-serif",
-                    borderRadius: "1rem", // Classic elegant
-                    cardStyle: "luxury",
-                    title: "ROYAL VELVET NIGHT"
+                    borderRadius: "0.5rem",
+                    buttonRadius: "0.375rem",
+                    title: "Vernissage Club"
                 },
                 programacao: [
                     {
                         id: "vernissage-sexta",
                         dia: "SEXTA",
-                        nome: "Reggaeton Velvet Night",
+                        nome: "REGGAETON VELVET NIGHT",
                         horario: "22h às 04h",
-                        djs: "DJs de Reggaeton & Ritmos Latinos",
-                        descricao: "Uma noite elegante e altamente sensual. Dança, coquetéis artesanais e DJs consagrados.",
-                        entradaFree: "Entrada R$20 (Sujeito a lotação)",
+                        djs: "DJs convidados de Reggaeton",
+                        descricao: "O melhor da cultura latina de forma sofisticada.",
+                        entradaFree: "Portaria R$20",
                         promocoes: [
-                            { nome: "Tequila Grátis na Entrada", descricao: "Para as primeiras 100 pessoas", tipo: "freebie" },
-                            { nome: "Welcome Drink Espumante", descricao: "Até as 23h30 para mulheres", tipo: "freebie" }
+                            { nome: "Welcome Drink Espumante", descricao: "Até 23h30 para mulheres", tipo: "promo" }
                         ]
                     }
                 ]
             }
         ];
 
-        // --- SISTEMA DE ESTADO EM MEMÓRIA (Persistência Local via localStorage opcional) ---
+        // --- SISTEMA DE ESTADO ---
         let currentTab = 'discover';
         let activeHouseId = null;
         let isManagerMode = false;
         let reservations = JSON.parse(localStorage.getItem('gyn_reservas')) || [];
 
-        // Inicialização do app
+        // Inicializar
         window.addEventListener('DOMContentLoaded', () => {
             renderHouses();
             renderGlobalPromos();
             updateReservasUI();
             lucide.createIcons();
-            applyTheme('default'); // Começa com o tema geral do app
+            applyTheme('default');
         });
 
-        // --- MOTOR DE SESSÃO DE TEMAS (Muda CSS Dinamicamente) ---
+        // --- MOTOR DE TEMAS MINIMALISTAS ---
         function applyTheme(houseId) {
             const root = document.documentElement;
             
             if (houseId === 'default') {
-                root.style.setProperty('--bg-app', '#08080c');
-                root.style.setProperty('--bg-card', '#12121a');
-                root.style.setProperty('--border-color', '#212130');
-                root.style.setProperty('--primary', '#a855f7');
-                root.style.setProperty('--primary-glow', 'rgba(168, 85, 247, 0.4)');
-                root.style.setProperty('--secondary', '#ec4899');
-                root.style.setProperty('--accent', '#06b6d4');
+                root.style.setProperty('--bg-app', '#0a0a0a');
+                root.style.setProperty('--bg-card', '#121212');
+                root.style.setProperty('--border-color', '#1c1c1c');
+                root.style.setProperty('--primary', '#ffffff');
+                root.style.setProperty('--secondary', '#a3a3a3');
+                root.style.setProperty('--accent', '#f5f5f5');
                 root.style.setProperty('--font-heading', "'Space Grotesk', sans-serif");
                 root.style.setProperty('--font-body', "'Plus Jakarta Sans', sans-serif");
-                root.style.setProperty('--border-radius', '1.25rem');
-                root.style.setProperty('--glow-intensity', '0 0 20px');
+                root.style.setProperty('--border-radius', '0.5rem');
+                root.style.setProperty('--button-radius', '0.375rem');
                 
-                document.getElementById('current-vibe-title').innerText = "GynNight Pro";
-                document.getElementById('current-vibe-title').className = "text-sm font-bold tracking-tight font-heading text-[var(--primary)]";
+                document.getElementById('header-title').innerText = "GynNight";
+                document.getElementById('header-title').className = "text-sm font-bold tracking-[0.05em] font-heading text-white";
                 return;
             }
 
@@ -680,115 +490,90 @@
             root.style.setProperty('--bg-card', t.bgCard);
             root.style.setProperty('--border-color', t.borderColor);
             root.style.setProperty('--primary', t.primary);
-            root.style.setProperty('--primary-glow', t.primaryGlow);
             root.style.setProperty('--secondary', t.secondary);
             root.style.setProperty('--accent', t.accent);
             root.style.setProperty('--font-heading', t.fontHeading);
             root.style.setProperty('--font-body', t.fontBody);
             root.style.setProperty('--border-radius', t.borderRadius);
+            root.style.setProperty('--button-radius', t.buttonRadius);
             
-            // Alterar o título do topo para refletir a Vibe da casa selecionada
-            const titleEl = document.getElementById('current-vibe-title');
-            titleEl.innerText = t.title;
-            titleEl.className = "text-sm font-black tracking-widest uppercase font-heading text-[var(--primary)] text-neon-glow";
+            const titleEl = document.getElementById('header-title');
+            titleEl.innerText = t.title.toUpperCase();
+            titleEl.className = "text-xs font-black tracking-[0.15em] font-heading text-theme-primary";
         }
 
         // --- SISTEMA DE ABAS ---
         function switchTab(tab) {
             currentTab = tab;
             
-            // Ocultar todas as telas principais
             document.getElementById('tab-discover-view').classList.add('hidden');
             document.getElementById('tab-promos-view').classList.add('hidden');
             document.getElementById('tab-reservas-view').classList.add('hidden');
             document.getElementById('house-detail-view').classList.add('hidden');
             document.getElementById('manager-dashboard-view').classList.add('hidden');
 
-            // Resetar botões do menu
             document.querySelectorAll('.nav-btn').forEach(btn => {
-                btn.classList.remove('text-[var(--primary)]');
-                btn.classList.add('text-gray-400');
+                btn.className = "nav-btn flex flex-col items-center justify-center space-y-1 text-neutral-500 hover:text-neutral-300 transition-all";
             });
 
-            // Ativar a tela correspondente
             if (tab === 'discover') {
                 document.getElementById('tab-discover-view').classList.remove('hidden');
-                document.getElementById('nav-discover').classList.add('text-[var(--primary)]');
-                document.getElementById('nav-discover').classList.remove('text-gray-400');
+                document.getElementById('nav-discover').className = "nav-btn flex flex-col items-center justify-center space-y-1 text-white transition-all";
                 applyTheme(activeHouseId || 'default');
             } else if (tab === 'promos') {
                 document.getElementById('tab-promos-view').classList.remove('hidden');
-                document.getElementById('nav-promos').classList.add('text-[var(--primary)]');
-                document.getElementById('nav-promos').classList.remove('text-gray-400');
-                applyTheme('default'); // Nas abas globais mantemos o tema padrão neutro
+                document.getElementById('nav-promos').className = "nav-btn flex flex-col items-center justify-center space-y-1 text-white transition-all";
+                applyTheme('default');
             } else if (tab === 'reservas') {
                 document.getElementById('tab-reservas-view').classList.remove('hidden');
-                document.getElementById('nav-reservas').classList.add('text-[var(--primary)]');
-                document.getElementById('nav-reservas').classList.remove('text-gray-400');
+                document.getElementById('nav-reservas').className = "nav-btn flex flex-col items-center justify-center space-y-1 text-white transition-all relative";
                 applyTheme('default');
             }
 
-            // Se for modo gerente e trocou de aba, sair do modo gerente para não confundir o cliente
             if (isManagerMode) {
                 exitManagerMode();
             }
         }
 
-        // --- RENDERIZADORES DE CONTEÚDO ---
-        
-        // 1. Renderizar Casas Noturnas (Aba Descobrir)
-        function renderHouses(filter = 'todos') {
+        // --- LISTAGEM DE CASAS ---
+        function renderHouses(filter = '') {
             const container = document.getElementById('houses-list-container');
             container.innerHTML = '';
 
             let filtered = housesData;
-            if (filter !== 'todos') {
+            if (filter) {
                 filtered = housesData.filter(h => 
-                    h.setor.toLowerCase().includes(filter.toLowerCase()) || 
-                    h.especialidade.toLowerCase().includes(filter.toLowerCase())
+                    h.nome.toLowerCase().includes(filter.toLowerCase()) || 
+                    h.especialidade.toLowerCase().includes(filter.toLowerCase()) ||
+                    h.setor.toLowerCase().includes(filter.toLowerCase())
                 );
-            }
-
-            if (filtered.length === 0) {
-                container.innerHTML = `
-                    <div class="text-center py-8 text-gray-500 text-xs">
-                        Nenhuma balada encontrada para o filtro "${filter}"
-                    </div>
-                `;
-                return;
             }
 
             filtered.forEach(house => {
                 const card = document.createElement('div');
-                card.className = "theme-card relative overflow-hidden rounded-[var(--border-radius)] border border-brand-border p-4 flex flex-col justify-between space-y-4 hover:border-[var(--primary)] transition-all cursor-pointer shadow-md group";
+                card.className = "border border-theme-border bg-theme-card p-5 rounded-[var(--border-radius)] space-y-4 hover:border-neutral-500 transition-all cursor-pointer group";
                 card.onclick = () => openHouseDetail(house.id);
 
                 card.innerHTML = `
-                    <div class="absolute inset-0 bg-cover bg-center opacity-30 group-hover:scale-105 group-hover:opacity-45 transition-all duration-500" style="background-image: url('${house.imagemCapa}');"></div>
-                    <div class="absolute inset-0 bg-gradient-to-r from-black via-black/80 to-transparent"></div>
-                    
-                    <div class="relative z-10 flex justify-between items-start">
+                    <div class="flex justify-between items-start">
                         <div class="space-y-1">
-                            <span class="text-[9px] font-black tracking-widest text-[var(--accent)] uppercase font-heading">${house.especialidade}</span>
-                            <h3 class="text-lg font-black font-heading tracking-tight text-white group-hover:text-[var(--primary)] transition-all">${house.nome}</h3>
-                            <div class="flex items-center space-x-1 text-[11px] text-gray-400">
-                                <i data-lucide="map-pin" class="w-3.5 h-3.5 text-gray-400"></i>
-                                <span>${house.setor}</span>
-                            </div>
+                            <h3 class="text-sm font-bold tracking-tight text-white uppercase font-heading group-hover:text-theme-primary transition-colors">${house.nome}</h3>
+                            <p class="text-[10px] text-neutral-500 uppercase tracking-widest font-medium font-heading">${house.especialidade}</p>
                         </div>
-                        <div class="w-10 h-10 rounded-full bg-gradient-to-br ${house.logoGradient} p-0.5 shadow-lg shrink-0 flex items-center justify-center font-black font-heading text-sm text-white">
-                            ${house.nome.substring(0, 2).toUpperCase()}
-                        </div>
+                        <span class="text-[10px] text-neutral-500 flex items-center space-x-1">
+                            <i data-lucide="map-pin" class="w-3.5 h-3.5 text-neutral-600"></i>
+                            <span class="font-medium font-heading uppercase tracking-wider text-[9px]">${house.setor}</span>
+                        </span>
                     </div>
 
-                    <div class="relative z-10 flex justify-between items-center pt-2 border-t border-white border-opacity-5">
-                        <span class="text-[10px] text-gray-400 flex items-center space-x-1">
-                            <i data-lucide="instagram" class="w-3.5 h-3.5 text-[var(--secondary)]"></i>
+                    <div class="flex justify-between items-center pt-3 border-t border-theme-border">
+                        <span class="text-[10px] text-neutral-500 flex items-center space-x-1 font-mono">
+                            <i data-lucide="instagram" class="w-3 h-3"></i>
                             <span>${house.instagram}</span>
                         </span>
-                        <div class="flex items-center space-x-1 text-xs font-bold text-[var(--primary)]">
-                            <span>Entrar</span>
-                            <i data-lucide="chevron-right" class="w-4 h-4 transform group-hover:translate-x-1 transition-all"></i>
+                        <div class="flex items-center space-x-1 text-[10px] uppercase font-bold tracking-wider text-theme-primary">
+                            <span>Ver Programação</span>
+                            <i data-lucide="chevron-right" class="w-3.5 h-3.5"></i>
                         </div>
                     </div>
                 `;
@@ -797,16 +582,13 @@
             lucide.createIcons();
         }
 
-        // Filtro de tags rápido
-        function filterHouses(category) {
-            document.querySelectorAll('.filter-tag').forEach(tag => {
-                tag.className = "filter-tag px-3 py-1 bg-brand-card border border-brand-border text-gray-300 text-xs font-medium rounded-full shrink-0 transition-all";
-            });
-            event.target.className = "filter-tag px-3 py-1 bg-[var(--primary)] text-white text-xs font-semibold rounded-full shrink-0 transition-all border border-transparent";
-            renderHouses(category);
+        // Filtro de Busca
+        function searchFilter() {
+            const val = document.getElementById('search-input').value;
+            renderHouses(val);
         }
 
-        // 2. Renderizar Detalhes da Casa Selecionada
+        // --- DETALHES DA CASA ---
         function openHouseDetail(houseId) {
             activeHouseId = houseId;
             applyTheme(houseId);
@@ -814,7 +596,6 @@
             const house = housesData.find(h => h.id === houseId);
             const view = document.getElementById('house-detail-view');
             
-            // Ocultar as outras e exibir o detalhe
             document.getElementById('tab-discover-view').classList.add('hidden');
             view.classList.remove('hidden');
 
@@ -822,56 +603,41 @@
             house.programacao.forEach(p => {
                 let promosHtml = '';
                 p.promocoes.forEach(promo => {
-                    let icon = 'gift';
-                    if (promo.tipo === 'dobradinha') icon = 'refresh-cw';
-                    if (promo.tipo === 'lote') icon = 'trending-up';
-                    
                     promosHtml += `
-                        <div class="flex items-center space-x-2 bg-white bg-opacity-5 rounded-lg p-2 border border-white border-opacity-5 text-[11px]">
-                            <i data-lucide="${icon}" class="w-3.5 h-3.5 text-[var(--secondary)]"></i>
-                            <div>
-                                <p class="font-bold text-gray-200 leading-tight">${promo.nome}</p>
-                                <p class="text-[9px] text-gray-400 leading-none">${promo.descricao}</p>
-                            </div>
+                        <div class="flex items-start space-x-1.5 text-[11px] text-neutral-400">
+                            <span class="text-theme-primary font-bold">•</span>
+                            <span class="leading-tight"><strong>${promo.nome}:</strong> ${promo.descricao}</span>
                         </div>
                     `;
                 });
 
                 progHtml += `
-                    <div class="theme-card p-4 border border-brand-border rounded-[var(--border-radius)] space-y-3 shadow-md relative overflow-hidden">
-                        <div class="absolute top-0 right-0 bg-[var(--primary)] text-black font-extrabold text-[9px] tracking-widest uppercase px-3 py-1 rounded-bl-lg font-heading">
-                            ${p.dia}
-                        </div>
-                        
-                        <div class="space-y-1.5 pr-14">
-                            <h4 class="text-sm font-black font-heading tracking-tight text-white">${p.nome}</h4>
-                            <p class="text-[10px] text-[var(--accent)] font-semibold flex items-center space-x-1">
-                                <i data-lucide="clock" class="w-3 h-3"></i>
-                                <span>${p.horario}</span>
-                            </p>
+                    <div class="border border-theme-border bg-theme-card p-5 rounded-[var(--border-radius)] space-y-4">
+                        <div class="flex justify-between items-start border-b border-theme-border pb-3">
+                            <div class="space-y-0.5">
+                                <span class="text-[9px] tracking-widest font-black uppercase text-theme-secondary font-heading">${p.dia}</span>
+                                <h4 class="text-xs font-bold text-white font-heading uppercase">${p.nome}</h4>
+                            </div>
+                            <span class="text-[9px] text-neutral-500 font-mono">${p.horario}</span>
                         </div>
 
-                        <p class="text-xs text-gray-300 leading-relaxed">${p.descricao}</p>
+                        <p class="text-[11px] text-neutral-400 leading-relaxed">${p.descricao}</p>
 
                         <div class="space-y-1">
-                            <span class="text-[10px] font-bold uppercase text-gray-400 tracking-wider">Lineup / DJs:</span>
-                            <p class="text-xs text-[var(--primary)] font-semibold">${p.djs}</p>
+                            <span class="text-[8px] uppercase tracking-widest font-bold text-neutral-500 font-heading">Lineup</span>
+                            <p class="text-[11px] text-theme-primary font-mono leading-tight uppercase">${p.djs}</p>
                         </div>
 
-                        <div class="space-y-2 pt-2 border-t border-white border-opacity-5">
-                            <span class="text-[10px] font-bold uppercase text-gray-400 tracking-wider">Promoções de Hoje:</span>
-                            <div class="grid grid-cols-1 gap-2">
-                                ${promosHtml}
-                            </div>
-                        </div>
+                        ${promosHtml ? `
+                        <div class="space-y-1.5 pt-2 border-t border-theme-border">
+                            <span class="text-[8px] uppercase tracking-widest font-bold text-neutral-500 font-heading">Benefícios de Hoje</span>
+                            <div class="space-y-1">${promosHtml}</div>
+                        </div>` : ''}
 
-                        <div class="flex justify-between items-center pt-3 mt-1">
-                            <span class="bg-green-500 bg-opacity-10 border border-green-500/20 text-green-400 text-[10px] font-extrabold px-2 py-0.5 rounded-full uppercase tracking-wider animate-pulse">
-                                ${p.entradaFree}
-                            </span>
-                            <button onclick="openReservationModal('${p.id}', '${house.id}')" class="theme-btn px-4 py-1.5 text-[11px] font-bold uppercase tracking-wider text-white shadow-md flex items-center space-x-1">
-                                <i data-lucide="ticket" class="w-3.5 h-3.5"></i>
-                                <span>Reservar</span>
+                        <div class="flex justify-between items-center pt-3 border-t border-theme-border">
+                            <span class="text-[9px] font-bold text-neutral-500 tracking-wider uppercase font-heading">${p.entradaFree}</span>
+                            <button onclick="openReservationModal('${p.id}', '${house.id}')" class="bg-white hover:bg-neutral-200 text-black px-4 py-2 rounded-[var(--button-radius)] text-[10px] font-bold uppercase tracking-wider font-heading">
+                                Adicionar Nome
                             </button>
                         </div>
                     </div>
@@ -879,53 +645,29 @@
             });
 
             view.innerHTML = `
-                <!-- Top Back Bar -->
-                <button onclick="backToDiscover()" class="flex items-center space-x-1 bg-white bg-opacity-5 border border-brand-border px-3 py-1.5 rounded-full text-xs font-bold hover:bg-opacity-10 text-white transition-all">
-                    <i data-lucide="arrow-left" class="w-4 h-4 text-[var(--primary)]"></i>
-                    <span>Voltar para Lista</span>
+                <!-- Voltar -->
+                <button onclick="backToDiscover()" class="flex items-center space-x-1.5 border border-theme-border px-3.5 py-1.5 rounded-full text-[10px] uppercase tracking-wider font-semibold hover:bg-neutral-900 text-neutral-300">
+                    <i data-lucide="arrow-left" class="w-3.5 h-3.5 text-theme-primary"></i>
+                    <span>Voltar para Casas</span>
                 </button>
 
-                <!-- House Cover Card -->
-                <div class="relative rounded-[var(--border-radius)] overflow-hidden h-44 flex flex-col justify-end p-5 border border-brand-border group shadow-lg">
-                    <div class="absolute inset-0 bg-cover bg-center" style="background-image: url('${house.imagemCapa}');"></div>
-                    <div class="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent"></div>
-                    <div class="relative z-10 flex justify-between items-end">
+                <!-- Infos da Casa -->
+                <div class="border border-theme-border bg-theme-card p-6 rounded-[var(--border-radius)] space-y-2">
+                    <div class="flex justify-between items-start">
                         <div class="space-y-1">
-                            <span class="bg-[var(--primary)] text-black font-black text-[9px] uppercase px-2 py-0.5 rounded-full font-heading tracking-widest inline-block">${house.especialidade}</span>
-                            <h2 class="text-2xl font-black font-heading tracking-tight text-white leading-none">${house.nome}</h2>
-                            <p class="text-xs text-gray-300 flex items-center space-x-1">
-                                <i data-lucide="map-pin" class="w-3.5 h-3.5 text-[var(--accent)]"></i>
+                            <span class="text-[9px] tracking-widest uppercase font-bold text-neutral-500 font-heading">${house.especialidade}</span>
+                            <h2 class="text-base font-bold text-white uppercase tracking-tight font-heading">${house.nome}</h2>
+                            <p class="text-xs text-neutral-400 flex items-center space-x-1">
+                                <i data-lucide="map-pin" class="w-3.5 h-3.5 text-neutral-600"></i>
                                 <span>${house.setor}</span>
                             </p>
                         </div>
-                        <a href="https://instagram.com" target="_blank" class="bg-white bg-opacity-10 backdrop-blur-md border border-white/10 p-2 rounded-full hover:bg-opacity-20 text-white flex items-center justify-center">
-                            <i data-lucide="instagram" class="w-4 h-4 text-[var(--secondary)]"></i>
-                        </a>
                     </div>
                 </div>
 
-                <!-- Info Blocks -->
-                <div class="grid grid-cols-2 gap-3 text-center">
-                    <div class="theme-card p-3 border border-brand-border rounded-[var(--border-radius)] space-y-1">
-                        <span class="text-[10px] text-gray-400 font-bold uppercase tracking-widest">Capacidade</span>
-                        <p class="text-sm font-black text-white font-heading">Sujeito a Lotação</p>
-                    </div>
-                    <div class="theme-card p-3 border border-brand-border rounded-[var(--border-radius)] space-y-1">
-                        <span class="text-[10px] text-gray-400 font-bold uppercase tracking-widest">Atendimento</span>
-                        <p class="text-sm font-black text-white font-heading">Altamente Recomendado</p>
-                    </div>
-                </div>
-
-                <!-- Programas e Festas -->
+                <!-- Programação -->
                 <div class="space-y-4">
-                    <div class="flex justify-between items-center">
-                        <h3 class="text-sm font-black uppercase font-heading tracking-widest text-[var(--primary)] text-neon-glow">PROGRAMAÇÃO DA SEMANA</h3>
-                        <span class="text-[10px] text-gray-400 font-semibold flex items-center space-x-1">
-                            <i data-lucide="calendar" class="w-3.5 h-3.5 text-[var(--accent)]"></i>
-                            <span>Clique para Reservar</span>
-                        </span>
-                    </div>
-
+                    <h3 class="text-[10px] uppercase font-bold tracking-widest text-neutral-400 font-heading">Agenda da Semana</h3>
                     <div class="space-y-4">
                         ${progHtml}
                     </div>
@@ -940,82 +682,59 @@
             switchTab('discover');
         }
 
-        // 3. Renderizar Promoções Globais (Aba Promoções)
+        // --- PROMOÇÕES GLOBAIS ---
         function renderGlobalPromos() {
             const container = document.getElementById('promos-list-container');
             container.innerHTML = '';
 
-            let hasPromos = false;
-
             housesData.forEach(house => {
                 house.programacao.forEach(p => {
                     p.promocoes.forEach(promo => {
-                        hasPromos = true;
                         const card = document.createElement('div');
-                        card.className = "theme-card relative overflow-hidden rounded-[var(--border-radius)] border border-brand-border p-4 flex justify-between items-center hover:border-[var(--secondary)] transition-all cursor-pointer group shadow-sm";
+                        card.className = "border border-theme-border bg-theme-card p-4 rounded-[var(--border-radius)] flex justify-between items-center hover:border-neutral-700 transition-colors cursor-pointer group";
                         card.onclick = () => openHouseDetail(house.id);
 
                         card.innerHTML = `
-                            <div class="space-y-2">
+                            <div class="space-y-1.5">
                                 <div class="flex items-center space-x-2">
-                                    <span class="bg-white bg-opacity-5 border border-brand-border px-2 py-0.5 rounded-full text-[9px] font-bold text-gray-300">
-                                        ${house.nome}
-                                    </span>
-                                    <span class="text-[10px] font-bold text-[var(--accent)] uppercase font-heading tracking-widest">${p.dia}</span>
+                                    <span class="text-[8px] font-bold font-heading text-neutral-500 border border-theme-border px-1.5 py-0.5 rounded uppercase tracking-widest">${house.nome}</span>
+                                    <span class="text-[9px] text-neutral-400 font-bold tracking-wider font-heading">${p.dia}</span>
                                 </div>
                                 <div class="space-y-0.5">
-                                    <h4 class="text-sm font-black font-heading text-white tracking-tight">${promo.nome}</h4>
-                                    <p class="text-xs text-gray-400">${promo.descricao}</p>
+                                    <h4 class="text-xs font-bold text-white uppercase tracking-tight font-heading">${promo.nome}</h4>
+                                    <p class="text-[11px] text-neutral-400 leading-tight">${promo.descricao}</p>
                                 </div>
                             </div>
-                            <div class="flex flex-col items-end space-y-2 shrink-0">
-                                <span class="bg-[var(--secondary)] text-white text-[9px] font-extrabold uppercase px-2 py-0.5 rounded-full tracking-wider animate-pulse">PROMO DO DIA</span>
-                                <div class="flex items-center space-x-1 text-[11px] font-bold text-[var(--primary)]">
-                                    <span>Ir para a Casa</span>
-                                    <i data-lucide="arrow-right" class="w-3.5 h-3.5 transform group-hover:translate-x-1 transition-all"></i>
-                                </div>
-                            </div>
+                            <i data-lucide="chevron-right" class="w-4 h-4 text-neutral-600 group-hover:text-neutral-400 transition-colors"></i>
                         `;
                         container.appendChild(card);
                     });
                 });
             });
-
-            if (!hasPromos) {
-                container.innerHTML = `<div class="text-center py-8 text-gray-500 text-xs">Nenhuma promoção ativa hoje.</div>`;
-            }
             lucide.createIcons();
         }
 
-        // --- SISTEMA DE RESERVAS INTERATIVO ---
-        
-        // Abre modal de reserva preenchendo as infos correspondentes
+        // --- MOTOR DE RESERVAS ---
         function openReservationModal(eventId, houseId) {
             const house = housesData.find(h => h.id === houseId);
             const p = house.programacao.find(prog => prog.id === eventId);
             
-            document.getElementById('modal-event-title').innerText = `Garantir Lista: ${p.nome}`;
-            document.getElementById('modal-house-title').innerText = `${house.nome} (${house.setor})`;
+            document.getElementById('modal-event-title').innerText = p.nome;
+            document.getElementById('modal-house-title').innerText = house.nome;
             document.getElementById('modal-event-id').value = eventId;
             document.getElementById('modal-house-id').value = houseId;
-            document.getElementById('modal-event-rules').innerText = `Esta reserva concede o benefício: ${p.entradaFree}. Lembre-se: o check-in é obrigatório na entrada para validação de presença.`;
+            document.getElementById('modal-event-rules').innerText = `Entrada e validade do nome na portaria: ${p.entradaFree}.`;
 
-            const modal = document.getElementById('reservation-modal');
-            modal.classList.remove('hidden');
-            modal.classList.add('flex');
+            document.getElementById('reservation-modal').classList.remove('hidden');
             
-            // Auto preenchimento amigável para demonstração rápida
             document.getElementById('res-name').value = "Convidado VIP";
-            document.getElementById('res-phone').value = "(62) 99123-4567";
+            document.getElementById('res-phone').value = "(62) 99000-0000";
         }
 
         function closeReservationModal() {
-            const modal = document.getElementById('reservation-modal');
-            modal.classList.add('hidden');
-            modal.classList.remove('flex');
+            document.getElementById('reservation-modal').classList.add('hidden');
         }
 
-        // Trata o envio do formulário de reserva
         function handleReservationSubmit(event) {
             event.preventDefault();
 
@@ -1028,8 +747,7 @@
             const house = housesData.find(h => h.id === houseId);
             const p = house.programacao.find(prog => prog.id === eventId);
 
-            // Adiciona nova reserva
-            const newReserva = {
+            const newRes = {
                 id: 'res-' + Date.now(),
                 eventId: eventId,
                 houseId: houseId,
@@ -1040,36 +758,28 @@
                 userName: name,
                 userPhone: phone,
                 guestsCount: guests,
-                status: 'confirmada', // confirmada, cancelada, presente
-                createdDate: new Date().toLocaleDateString('pt-BR')
+                status: 'confirmada'
             };
 
-            reservations.unshift(newReserva);
+            reservations.unshift(newRes);
             localStorage.setItem('gyn_reservas', JSON.stringify(reservations));
 
             closeReservationModal();
-            showSuccessToast("Sua reserva foi gerada com sucesso! Código QR gerado.");
-            
-            // Atualizar contadores e interface
+            showSuccessToast("Confirmado na Lista!");
             updateReservasUI();
             
-            // Ir para a aba de reservas para o cliente ver o ingresso em tempo real!
             setTimeout(() => {
                 switchTab('reservas');
-            }, 800);
+            }, 500);
         }
 
         function showSuccessToast(msg) {
             const toast = document.getElementById('toast-success');
             document.getElementById('toast-message').innerText = msg;
             toast.classList.remove('hidden');
-            
-            setTimeout(() => {
-                toast.classList.add('hidden');
-            }, 3000);
+            setTimeout(() => toast.classList.add('hidden'), 2000);
         }
 
-        // Atualiza a listagem de ingressos/reservas
         function updateReservasUI() {
             const emptyState = document.getElementById('reservas-empty-state');
             const listContainer = document.getElementById('reservas-list-container');
@@ -1078,10 +788,8 @@
 
             const activeReservations = reservations.filter(r => r.status !== 'cancelada');
 
-            // Atualiza contadores
             countLabel.innerText = `${activeReservations.length} Ativas`;
             if (activeReservations.length > 0) {
-                badge.innerText = activeReservations.length;
                 badge.classList.remove('hidden');
                 emptyState.classList.add('hidden');
                 listContainer.classList.remove('hidden');
@@ -1095,71 +803,49 @@
             listContainer.innerHTML = '';
             activeReservations.forEach(r => {
                 const item = document.createElement('div');
-                item.className = "theme-card border border-brand-border rounded-[var(--border-radius)] p-4 space-y-4 shadow-lg relative overflow-hidden bg-brand-card";
+                item.className = "border border-theme-border bg-theme-card p-5 rounded-[var(--border-radius)] space-y-4 relative";
                 
-                // Mudar cor com base no status (Presente vs Ativa)
-                let statusBadge = `<span class="bg-green-500 bg-opacity-10 border border-green-500/20 text-green-400 text-[10px] font-bold px-2 py-0.5 rounded-full flex items-center space-x-1">
-                                    <span class="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse"></span>
-                                    <span>Lista Confirmada</span>
-                                   </span>`;
-                
-                if (r.status === 'presente') {
-                    statusBadge = `<span class="bg-blue-500 bg-opacity-10 border border-blue-500/20 text-blue-400 text-[10px] font-bold px-2 py-0.5 rounded-full flex items-center space-x-1">
-                                    <i data-lucide="check-circle-2" class="w-3 h-3 text-blue-400"></i>
-                                    <span>Presença Confirmada</span>
-                                   </span>`;
-                }
+                let statusBadge = r.status === 'presente' 
+                    ? `<span class="text-[9px] uppercase font-bold tracking-wider text-blue-400 font-heading flex items-center space-x-1">
+                        <i data-lucide="check-circle" class="w-3.5 h-3.5"></i>
+                        <span>Entrada Validada</span>
+                       </span>`
+                    : `<span class="text-[9px] uppercase font-bold tracking-wider text-neutral-400 font-heading flex items-center space-x-1">
+                        <span class="w-1.5 h-1.5 rounded-full bg-neutral-400 animate-pulse"></span>
+                        <span>Confirmado</span>
+                       </span>`;
 
                 item.innerHTML = `
                     <div class="flex justify-between items-start">
-                        <div class="space-y-1">
-                            <span class="text-[10px] font-bold uppercase text-[var(--primary)] tracking-widest">${r.houseName}</span>
-                            <h4 class="text-sm font-black font-heading text-white tracking-tight">${r.eventName}</h4>
-                            <div class="flex items-center space-x-2 text-[11px] text-gray-400">
-                                <span class="flex items-center space-x-0.5">
-                                    <i data-lucide="calendar" class="w-3 h-3"></i>
-                                    <span>${r.eventDay}</span>
-                                </span>
-                                <span>•</span>
-                                <span class="flex items-center space-x-0.5">
-                                    <i data-lucide="clock" class="w-3 h-3"></i>
-                                    <span>${r.eventTime}</span>
-                                </span>
-                            </div>
+                        <div class="space-y-0.5">
+                            <span class="text-[8px] uppercase tracking-widest font-bold text-neutral-500 font-heading">${r.houseName}</span>
+                            <h4 class="text-xs font-bold text-white uppercase tracking-tight font-heading">${r.eventName}</h4>
+                            <p class="text-[10px] text-neutral-500 font-mono">${r.eventDay} — ${r.eventTime}</p>
                         </div>
                         ${statusBadge}
                     </div>
 
-                    <!-- Divisão Visual de Ticket -->
-                    <div class="flex items-center justify-between py-1">
-                        <div class="w-3 h-6 rounded-r-full bg-brand-bg -ml-4 border-r border-t border-b border-brand-border"></div>
-                        <div class="flex-1 border-t border-dashed border-brand-border mx-2"></div>
-                        <div class="w-3 h-6 rounded-l-full bg-brand-bg -mr-4 border-l border-t border-b border-brand-border"></div>
-                    </div>
-
-                    <!-- Corpo do Ticket (Infos e QR Code Simulado) -->
-                    <div class="flex justify-between items-center bg-white bg-opacity-5 p-3 rounded-lg border border-white border-opacity-5">
-                        <div class="space-y-2 text-xs">
-                            <div>
-                                <span class="text-[9px] text-gray-400 uppercase tracking-widest font-bold">Titular da Reserva</span>
-                                <p class="font-bold text-white text-xs">${r.userName}</p>
+                    <div class="flex justify-between items-center pt-3 border-t border-theme-border">
+                        <div class="space-y-1 text-xs">
+                            <div class="leading-tight">
+                                <span class="text-[8px] text-neutral-500 uppercase tracking-widest font-bold font-heading">Convidado</span>
+                                <p class="font-bold text-neutral-200">${r.userName}</p>
                             </div>
-                            <div class="grid grid-cols-2 gap-2">
+                            <div class="grid grid-cols-2 gap-3 leading-tight pt-1">
                                 <div>
-                                    <span class="text-[9px] text-gray-400 uppercase tracking-widest font-bold">Pessoas</span>
-                                    <p class="font-semibold text-gray-200">${r.guestsCount} vaga(s)</p>
+                                    <span class="text-[8px] text-neutral-500 uppercase tracking-widest font-bold font-heading">Lugares</span>
+                                    <p class="font-medium text-neutral-400">${r.guestsCount}</p>
                                 </div>
                                 <div>
-                                    <span class="text-[9px] text-gray-400 uppercase tracking-widest font-bold">Contato</span>
-                                    <p class="font-semibold text-gray-200">${r.userPhone.split(' ')[1] || r.userPhone}</p>
+                                    <span class="text-[8px] text-neutral-500 uppercase tracking-widest font-bold font-heading">ID Portaria</span>
+                                    <p class="font-mono text-neutral-400">${r.id.split('-')[1].slice(-5).toUpperCase()}</p>
                                 </div>
                             </div>
                         </div>
-                        
-                        <!-- QR Code de Alta Fidelidade Feito em CSS e SVG -->
-                        <div class="flex flex-col items-center space-y-1 shrink-0 p-1 bg-white rounded-lg">
-                            <svg class="w-16 h-16 text-black" viewBox="0 0 100 100">
-                                <!-- QR Code Pattern Mockup -->
+
+                        <!-- QR Code Minimalista em SVG -->
+                        <div class="p-1.5 bg-white rounded shrink-0">
+                            <svg class="w-12 h-12 text-black" viewBox="0 0 100 100">
                                 <rect width="25" height="25" fill="black" />
                                 <rect x="5" y="5" width="15" height="15" fill="white" />
                                 <rect x="8" y="8" width="9" height="9" fill="black" />
@@ -1172,7 +858,7 @@
                                 <rect x="5" y="80" width="15" height="15" fill="white" />
                                 <rect x="8" y="83" width="9" height="9" fill="black" />
                                 
-                                <!-- Random bits pattern -->
+                                <!-- Random bits layout simple -->
                                 <rect x="35" y="5" width="10" height="10" fill="black" />
                                 <rect x="55" y="15" width="5" height="5" fill="black" />
                                 <rect x="40" y="30" width="15" height="10" fill="black" />
@@ -1180,18 +866,14 @@
                                 <rect x="45" y="55" width="20" height="5" fill="black" />
                                 <rect x="70" y="40" width="10" height="20" fill="black" />
                                 <rect x="85" y="75" width="10" height="10" fill="black" />
-                                <rect x="65" y="80" width="5" height="15" fill="black" />
                                 <rect x="35" y="75" width="15" height="10" fill="black" />
                             </svg>
-                            <span class="text-[8px] font-bold text-black uppercase select-none tracking-widest leading-none">GYNN-${r.id.split('-')[1].slice(-5)}</span>
                         </div>
                     </div>
 
-                    <!-- Ações da Reserva -->
-                    <div class="flex space-x-2 pt-1">
-                        <button onclick="cancelReserva('${r.id}')" class="flex-1 bg-white bg-opacity-5 border border-brand-border hover:bg-red-500 hover:bg-opacity-10 hover:border-red-500/30 text-xs text-gray-300 hover:text-red-400 py-2 rounded-lg font-bold transition-all flex items-center justify-center space-x-1">
-                            <i data-lucide="trash-2" class="w-3.5 h-3.5"></i>
-                            <span>Cancelar</span>
+                    <div class="pt-1 flex">
+                        <button onclick="cancelReserva('${r.id}')" class="flex-1 bg-neutral-950 border border-theme-border hover:bg-neutral-900 text-[10px] text-neutral-400 py-1.5 rounded font-bold uppercase tracking-wider font-heading transition-colors">
+                            Retirar Nome da Lista
                         </button>
                     </div>
                 `;
@@ -1200,36 +882,32 @@
             lucide.createIcons();
         }
 
-        // Cancela uma reserva
         function cancelReserva(id) {
-            if (confirm("Deseja realmente cancelar seu nome na lista para este evento?")) {
+            if (confirm("Retirar seu nome da lista?")) {
                 const rIndex = reservations.findIndex(r => r.id === id);
                 if (rIndex !== -1) {
                     reservations[rIndex].status = 'cancelada';
                     localStorage.setItem('gyn_reservas', JSON.stringify(reservations));
                     updateReservasUI();
-                    showSuccessToast("Reserva cancelada com sucesso.");
+                    showSuccessToast("Cancelado");
                 }
             }
         }
 
-        // --- MODO GERENTE (A cereja do bolo para a conversa com o Luan) ---
-        
+        // --- MODO GERENTE (DASHBOARD) ---
         function toggleManagerMode() {
             isManagerMode = !isManagerMode;
             
             const btn = document.getElementById('manager-toggle-btn');
-            const icon = document.getElementById('role-icon');
+            const dot = document.getElementById('role-dot');
             const text = document.getElementById('role-text');
 
             if (isManagerMode) {
-                // Ativar layout do gerente
-                btn.className = "flex items-center space-x-1 bg-green-500 text-black px-2.5 py-1 rounded-full transition-all duration-300 font-black";
-                icon.className = "w-3.5 h-3.5 text-black";
-                lucide.createIcons();
-                text.innerText = "Modo Gerente";
+                btn.className = "flex items-center space-x-1.5 bg-white text-black border border-white px-3 py-1.5 rounded-full transition-all duration-300";
+                dot.className = "w-1.5 h-1.5 rounded-full bg-black";
+                text.innerText = "Portaria";
                 
-                showSuccessToast("Acessando Dashboard do Gerente...");
+                showSuccessToast("Acessando Portaria");
                 openManagerDashboard();
             } else {
                 exitManagerMode();
@@ -1239,21 +917,18 @@
         function exitManagerMode() {
             isManagerMode = false;
             const btn = document.getElementById('manager-toggle-btn');
-            const icon = document.getElementById('role-icon');
+            const dot = document.getElementById('role-dot');
             const text = document.getElementById('role-text');
 
-            btn.className = "flex items-center space-x-1 bg-white bg-opacity-5 hover:bg-opacity-10 border border-brand-border px-2.5 py-1 rounded-full transition-all duration-300";
-            icon.className = "w-3.5 h-3.5 text-[var(--primary)]";
-            text.innerText = "Modo Cliente";
+            btn.className = "flex items-center space-x-1.5 border border-theme-border px-3 py-1.5 rounded-full hover:bg-neutral-900/50 transition-all duration-300";
+            dot.className = "w-1.5 h-1.5 rounded-full bg-neutral-400";
+            text.innerText = "Cliente";
             
             document.getElementById('manager-dashboard-view').classList.add('hidden');
-            
-            // Retornar para a aba discover com o tema correspondente
             switchTab('discover');
         }
 
         function openManagerDashboard() {
-            // Ocultar todas as outras abas
             document.getElementById('tab-discover-view').classList.add('hidden');
             document.getElementById('tab-promos-view').classList.add('hidden');
             document.getElementById('tab-reservas-view').classList.add('hidden');
@@ -1262,42 +937,38 @@
             const view = document.getElementById('manager-dashboard-view');
             view.classList.remove('hidden');
 
-            // Determinar qual casa o gerente administra (Padrão: Môi se não houver ativo)
             const houseId = activeHouseId || 'moi';
             const house = housesData.find(h => h.id === houseId);
             
-            // Calcular métricas
             const houseReservas = reservations.filter(r => r.houseId === houseId && r.status !== 'cancelada');
             const totalPessoas = houseReservas.reduce((acc, r) => acc + r.guestsCount, 0);
             const presentes = houseReservas.filter(r => r.status === 'presente').reduce((acc, r) => acc + r.guestsCount, 0);
-            const taxaPresenca = totalPessoas > 0 ? Math.round((presentes / totalPessoas) * 100) : 0;
 
-            // Renderizar painel
             let listReservasHtml = '';
             
             if (houseReservas.length === 0) {
                 listReservasHtml = `
-                    <div class="text-center py-8 text-gray-500 text-xs theme-card p-4">
-                        Nenhuma reserva de cliente ativa para esta semana. Tente simular uma reserva como cliente primeiro!
+                    <div class="text-center py-8 text-neutral-500 text-xs border border-dashed border-theme-border rounded-[var(--border-radius)] p-4">
+                        Nenhuma reserva cadastrada para ${house.nome}.
                     </div>
                 `;
             } else {
                 houseReservas.forEach(r => {
                     const checkinBtn = r.status === 'presente' 
-                        ? `<span class="text-xs font-bold text-blue-400 flex items-center space-x-1">
-                            <i data-lucide="check" class="w-4 h-4"></i>
-                            <span>Confirmado</span>
+                        ? `<span class="text-[10px] font-bold text-neutral-400 flex items-center space-x-1 font-heading">
+                            <i data-lucide="check" class="w-3.5 h-3.5 text-neutral-400"></i>
+                            <span>Confirmada</span>
                            </span>`
-                        : `<button onclick="confirmPresence('${r.id}')" class="bg-green-500 text-black font-extrabold text-[10px] px-3 py-1.5 rounded-md uppercase tracking-wider hover:bg-green-400 transition-all">
-                            Confirmar Entrada
+                        : `<button onclick="confirmPresence('${r.id}')" class="bg-neutral-100 text-black font-bold text-[9px] px-3 py-1.5 rounded uppercase tracking-wider font-heading hover:bg-white transition-colors">
+                            Validar Entrada
                            </button>`;
 
                     listReservasHtml += `
-                        <div class="theme-card p-3 border border-brand-border rounded-[var(--border-radius)] flex justify-between items-center bg-brand-card">
-                            <div class="space-y-1">
-                                <p class="text-xs font-black text-white leading-tight">${r.userName}</p>
-                                <p class="text-[10px] text-gray-400">${r.userPhone} • <strong>${r.guestsCount} pessoas</strong></p>
-                                <p class="text-[9px] text-[var(--accent)] font-bold uppercase tracking-wider">${r.eventName} (${r.eventDay})</p>
+                        <div class="border border-theme-border bg-theme-card p-3.5 rounded-[var(--border-radius)] flex justify-between items-center">
+                            <div class="space-y-0.5">
+                                <p class="text-xs font-bold text-white uppercase font-heading leading-tight">${r.userName}</p>
+                                <p class="text-[10px] text-neutral-500 font-mono">${r.userPhone} — <strong>${r.guestsCount} vagas</strong></p>
+                                <p class="text-[9px] text-theme-primary font-bold uppercase font-heading tracking-widest">${r.eventDay}</p>
                             </div>
                             <div>
                                 ${checkinBtn}
@@ -1309,64 +980,40 @@
 
             view.innerHTML = `
                 <div class="space-y-1">
-                    <span class="text-[10px] bg-green-500 text-black font-extrabold px-2.5 py-0.5 rounded-full uppercase tracking-widest font-heading inline-block">PAINEL DE GERÊNCIA</span>
-                    <h2 class="text-xl font-black font-heading tracking-tight text-white">${house.nome}</h2>
-                    <p class="text-xs text-gray-400">Controle de entrada, portaria e estatísticas de reservas.</p>
+                    <span class="text-[9px] font-bold text-neutral-500 tracking-widest uppercase font-heading">Portaria Digital</span>
+                    <h2 class="text-sm font-bold text-white uppercase tracking-wider font-heading">${house.nome}</h2>
                 </div>
 
                 <!-- Métricas do Dashboard -->
-                <div class="grid grid-cols-3 gap-2">
-                    <div class="theme-card p-2.5 border border-brand-border rounded-lg text-center bg-brand-card">
-                        <span class="text-[8px] text-gray-400 uppercase tracking-widest font-bold">Lista Ativa</span>
-                        <p class="text-base font-black text-white font-heading">${totalPessoas}</p>
-                        <p class="text-[8px] text-gray-500 leading-none">nomes confirmados</p>
+                <div class="grid grid-cols-2 gap-3">
+                    <div class="border border-theme-border bg-theme-card p-4 rounded-[var(--border-radius)] text-center space-y-1">
+                        <span class="text-[8px] text-neutral-500 uppercase tracking-widest font-bold font-heading">Total Lista</span>
+                        <p class="text-lg font-bold text-white font-mono">${totalPessoas}</p>
                     </div>
-                    <div class="theme-card p-2.5 border border-brand-border rounded-lg text-center bg-brand-card">
-                        <span class="text-[8px] text-gray-400 uppercase tracking-widest font-bold">Presentes</span>
-                        <p class="text-base font-black text-green-400 font-heading">${presentes}</p>
-                        <p class="text-[8px] text-gray-500 leading-none">check-ins feitos</p>
-                    </div>
-                    <div class="theme-card p-2.5 border border-brand-border rounded-lg text-center bg-brand-card">
-                        <span class="text-[8px] text-gray-400 uppercase tracking-widest font-bold">Presença %</span>
-                        <p class="text-base font-black text-[var(--primary)] font-heading">${taxaPresenca}%</p>
-                        <p class="text-[8px] text-gray-500 leading-none">taxa de conversão</p>
+                    <div class="border border-theme-border bg-theme-card p-4 rounded-[var(--border-radius)] text-center space-y-1">
+                        <span class="text-[8px] text-neutral-500 uppercase tracking-widest font-bold font-heading">Entradas</span>
+                        <p class="text-lg font-bold text-neutral-300 font-mono">${presentes}</p>
                     </div>
                 </div>
 
-                <!-- Lista de Check-in na Portaria -->
-                <div class="space-y-3">
-                    <div class="flex justify-between items-center border-b border-brand-border pb-1">
-                        <h3 class="text-xs font-black uppercase font-heading tracking-widest text-[var(--primary)]">LISTA DE PORTARIA (CHECK-IN)</h3>
-                        <span class="text-[9px] text-gray-500 font-bold">Total: ${houseReservas.length} cadastros</span>
-                    </div>
-
-                    <div class="space-y-3">
+                <!-- Lista de Check-in -->
+                <div class="space-y-3 pt-2">
+                    <h3 class="text-[9px] font-bold uppercase tracking-widest text-neutral-400 font-heading">Nomes Confirmados</h3>
+                    <div class="space-y-2.5">
                         ${listReservasHtml}
                     </div>
-                </div>
-
-                <!-- Tutorial rápido para demonstração comercial -->
-                <div class="p-3.5 bg-white bg-opacity-5 rounded-[var(--border-radius)] border border-dashed border-brand-border text-[11px] text-gray-400 space-y-1">
-                    <p class="font-bold text-gray-300 flex items-center space-x-1">
-                        <i data-lucide="help-circle" class="w-3.5 h-3.5 text-green-400"></i>
-                        <span>Como demonstrar ao cliente?</span>
-                    </p>
-                    <p>1. Vá ao modo <strong>Cliente</strong> e faça uma reserva numa festa da casa ${house.nome}.</p>
-                    <p>2. Retorne a este modo <strong>Gerente</strong>: o nome aparecerá na lista de portaria!</p>
-                    <p>3. Clique em <strong>Confirmar Entrada</strong> para ver os gráficos de ocupação se atualizarem na hora.</p>
                 </div>
             `;
             lucide.createIcons();
         }
 
-        // Confirma presença do cliente na lista da portaria
         function confirmPresence(id) {
             const rIndex = reservations.findIndex(r => r.id === id);
             if (rIndex !== -1) {
                 reservations[rIndex].status = 'presente';
                 localStorage.setItem('gyn_reservas', JSON.stringify(reservations));
-                showSuccessToast("Check-in confirmado com sucesso!");
-                openManagerDashboard(); // Recarrega painel com dados atualizados
+                showSuccessToast("Entrada Validada");
+                openManagerDashboard();
             }
         }
     </script>
