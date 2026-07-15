@@ -642,41 +642,7 @@
                     }
                 ]
             },
-            {
-                id: "mosaic",
-                nome: "MOSAIC",
-                categoria: "boate",
-                especialidade: "Pop, Eletropop, Hyperpop",
-                setor: "Setor Marista",
-                instagram: "@mosaic.goiania",
-                theme: {
-                    bgApp: "#040206", // Fundo quase preto (toque roxo imperceptível)
-                    bgCard: "#0b0812", // Cartão preto orquídea ultra escuro
-                    borderColor: "#1a1224",
-                    primary: "#f472b6", // Pastel Pink
-                    secondary: "#94a3b8",
-                    accent: "#22d3ee",
-                    fontHeading: "'Space Grotesk', sans-serif",
-                    fontBody: "'Space Grotesk', sans-serif",
-                    borderRadius: "0.75rem",
-                    buttonRadius: "0.375rem",
-                    title: "Mosaic Pop"
-                },
-                programacao: [
-                    {
-                        id: "mosaic-sabado",
-                        dia: "SÁBADO",
-                        nome: "HYPERPOP NIGHT",
-                        horario: "22h às 05h",
-                        djs: "DJs Residentes Mosaic",
-                        descricao: "Cultura pop, hyperpop e performances exclusivas.",
-                        entradaFree: "FREE até 23h com nome na lista",
-                        promocoes: [
-                            { nome: "Dobradinha Vodka com Energético", descricao: "Até 00h", tipo: "promo" }
-                        ]
-                    }
-                ]
-            },
+
             {
                 id: "vernissage",
                 nome: "VERNISSAGE CLUB",
@@ -747,6 +713,41 @@
                     }
                 ],
                 videoUrl: "https://player.vimeo.com/external/403844833.sd.mp4?s=cf8a6797cb3a0d500ff22ec25da06c641cc9a6e1&profile_id=165&oauth2_token_id=57447761"
+            },
+            {
+                id: "mosaic",
+                nome: "MOSAIC",
+                categoria: "boate",
+                especialidade: "Pop, Eletropop, Hyperpop",
+                setor: "Setor Marista",
+                instagram: "@mosaic.goiania",
+                theme: {
+                    bgApp: "#040206", // Fundo quase preto (toque roxo imperceptível)
+                    bgCard: "#0b0812", // Cartão preto orquídea ultra escuro
+                    borderColor: "#1a1224",
+                    primary: "#f472b6", // Pastel Pink
+                    secondary: "#94a3b8",
+                    accent: "#22d3ee",
+                    fontHeading: "'Space Grotesk', sans-serif",
+                    fontBody: "'Space Grotesk', sans-serif",
+                    borderRadius: "0.75rem",
+                    buttonRadius: "0.375rem",
+                    title: "Mosaic Pop"
+                },
+                programacao: [
+                    {
+                        id: "mosaic-sabado",
+                        dia: "SÁBADO",
+                        nome: "HYPERPOP NIGHT",
+                        horario: "22h às 05h",
+                        djs: "DJs Residentes Mosaic",
+                        descricao: "Cultura pop, hyperpop e performances exclusivas.",
+                        entradaFree: "FREE até 23h com nome na lista",
+                        promocoes: [
+                            { nome: "Dobradinha Vodka com Energético", descricao: "Até 00h", tipo: "promo" }
+                        ]
+                    }
+                ]
             },
             {
                 id: "beatproibido",
@@ -1683,7 +1684,10 @@
                 const btnTextColor = isColorLight ? 'text-black font-black' : 'text-white font-bold';
                 
                 card.innerHTML = `
-                    <video class="absolute inset-0 w-full h-full object-cover" loop playsinline muted src="${house.videoUrl}"></video>
+                    <video class="absolute inset-0 w-full h-full object-cover" loop playsinline muted>
+                        <source src="logo-casas/${house.id}.mp4" type="video/mp4">
+                        <source src="${house.videoUrl}" type="video/mp4">
+                    </video>
                     
                     <div class="absolute inset-0 bg-gradient-to-t from-black/95 via-black/40 to-black/20 pointer-events-none"></div>
                     
