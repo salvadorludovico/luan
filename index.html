@@ -706,7 +706,7 @@
         }
 
         // --- SISTEMA REELS/TIKTOK VIBES DE ALTA PERFORMANCE ---
-        let isVibesMuted = true;
+        let isVibesMuted = false;
         let vibesObserver = null;
         let vibesEngineInitialized = false;
 
@@ -1502,8 +1502,8 @@
                     <div class="absolute inset-0 bg-gradient-to-t from-black/95 via-black/40 to-black/20 pointer-events-none"></div>
                     
                     <button onclick="toggleVibesAudio(event)" class="absolute top-6 right-6 z-40 w-10 h-10 rounded-full bg-black/40 border border-white/10 flex items-center justify-center text-white backdrop-blur-md hover:bg-black/60 transition-all sound-toggle-btn">
-                        <i data-lucide="volume-x" class="w-4 h-4 mute-icon"></i>
-                        <i data-lucide="volume-2" class="w-4 h-4 unmute-icon hidden"></i>
+                        <i data-lucide="volume-x" class="w-4 h-4 mute-icon hidden"></i>
+                        <i data-lucide="volume-2" class="w-4 h-4 unmute-icon"></i>
                     </button>
 
                     ${index === 0 ? `
