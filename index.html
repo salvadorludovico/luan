@@ -1080,9 +1080,22 @@
 
                         card.innerHTML = `
                             <div class="flex justify-between items-start">
-                                <div class="space-y-1">
-                                    <h3 class="text-sm font-black tracking-tight uppercase font-heading" style="color: ${house.theme.primary}">${house.nome}</h3>
-                                    <p class="text-[10px] text-neutral-500 uppercase tracking-widest font-medium font-heading">${house.especialidade}</p>
+                                <div class="flex items-center space-x-3">
+                                    <!-- Container do Logo -->
+                                    <div class="w-10 h-10 rounded-full overflow-hidden border shrink-0 flex items-center justify-center relative" style="border-color: ${house.theme.primary}30; background-color: ${house.theme.bgCard}">
+                                        <!-- Logo real (se existir na pasta) -->
+                                        <img src="Logo Casas/${house.id}.png" onerror="this.classList.add('hidden'); this.nextElementSibling.classList.remove('hidden')" class="w-full h-full object-cover">
+                                        
+                                        <!-- Fallback: Letra Inicial Minimalista estilizada -->
+                                        <div class="hidden w-full h-full flex items-center justify-center text-xs font-black font-heading" style="color: ${house.theme.primary}">
+                                            ${house.nome.substring(0, 2).toUpperCase()}
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="space-y-1">
+                                        <h3 class="text-sm font-black tracking-tight uppercase font-heading" style="color: ${house.theme.primary}">${house.nome}</h3>
+                                        <p class="text-[10px] text-neutral-500 uppercase tracking-widest font-medium font-heading">${house.especialidade}</p>
+                                    </div>
                                 </div>
                                 <span class="text-[10px] text-neutral-500 flex items-center space-x-1">
                                     <i data-lucide="map-pin" class="w-3.5 h-3.5 text-neutral-600"></i>
@@ -1180,8 +1193,19 @@
                 </button>
 
                 <!-- Infos da Casa -->
-                <div class="border border-theme-border bg-theme-card p-6 rounded-[var(--border-radius)] space-y-2">
-                    <div class="flex justify-between items-start">
+                <div class="border border-theme-border bg-theme-card p-6 rounded-[var(--border-radius)]">
+                    <div class="flex items-center space-x-4">
+                        <!-- Container do Logo -->
+                        <div class="w-12 h-12 rounded-full overflow-hidden border shrink-0 flex items-center justify-center relative" style="border-color: ${house.theme.primary}30; background-color: ${house.theme.bgCard}">
+                            <!-- Logo real (se existir na pasta) -->
+                            <img src="Logo Casas/${house.id}.png" onerror="this.classList.add('hidden'); this.nextElementSibling.classList.remove('hidden')" class="w-full h-full object-cover">
+                            
+                            <!-- Fallback: Letra Inicial Minimalista estilizada -->
+                            <div class="hidden w-full h-full flex items-center justify-center text-sm font-black font-heading" style="color: ${house.theme.primary}">
+                                ${house.nome.substring(0, 2).toUpperCase()}
+                            </div>
+                        </div>
+                        
                         <div class="space-y-1">
                             <span class="text-[9px] tracking-widest uppercase font-bold text-neutral-500 font-heading">${house.especialidade}</span>
                             <h2 class="text-base font-bold text-white uppercase tracking-tight font-heading">${house.nome}</h2>
