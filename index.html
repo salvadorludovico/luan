@@ -1644,10 +1644,7 @@
                 const btnTextColor = isColorLight ? 'text-black font-black' : 'text-white font-bold';
                 
                 card.innerHTML = `
-                    <video class="absolute inset-0 w-full h-full object-cover" loop playsinline muted>
-                        <source src="logo-casas/${house.id}.mp4" type="video/mp4">
-                        <source src="${house.videoUrl}" type="video/mp4">
-                    </video>
+                    <video class="absolute inset-0 w-full h-full object-cover" loop playsinline muted src="logo-casas/${house.id}.mp4" onerror="if(this.src.indexOf('vimeo') === -1) { this.src='${house.videoUrl}'; this.load(); this.play().catch(e=>console.log(e)); }"></video>
                     
                     <div class="absolute inset-0 bg-gradient-to-t from-black/95 via-black/40 to-black/20 pointer-events-none"></div>
                     
